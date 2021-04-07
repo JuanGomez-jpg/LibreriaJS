@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="./CSS/styles.css" />
+    <title>Libreria</title>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="./JS/config.js"></script>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+    <div class="nav__center container">
+        <div class="nav__logo">
+            <h1>LIBRARY</h1>
+
+        </div>
+
+        <ul class="nav__list">
+            <a href="pages/login.html" class="login">Login</a>
+            <a href="pages/signup.html" class="signup">Sign Up</a>
+            <a href="#" onclick="LogOut()" class="logout">Log Out</a>
+            <div class="cart__icon">
+                <h2>Cart</h2>
+                <span class="item__total">0</span>
+            </div>
+        </ul>
+
+        <div class="hamburger">
+            <svg>
+                <use xlink:href="./img/sprite.svg#icon-menu"></use>
+            </svg>
+        </div>
+    </div>
+</nav>
+<!-- Navigation -->
+
+<!-- Products -->
+<section class="products">
+    <div class="product__center">
+
+    </div>
+</section>
+
+<section class="cart__overlay">
+    <div class="cart">
+      <span class="close__cart">
+        <svg>
+          <use xlink:href="./img/sprite.svg#icon-cross"></use>
+        </svg>
+      </span>
+        <h1>Your Cart</h1>
+        <div class="cart__centent">
+
+        </div>
+
+        <div class="cart__footer">
+            <h3>Total: $ <span class="cart__total">0</span></h3>
+            <button class="clear__cart btn">Clear Cart</button>
+        </div>
+    </div>
+</section>
+
+<script src="./JS/app.js"></script>
+</body>
+
+</html>

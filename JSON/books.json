@@ -1,0 +1,77 @@
+{
+  "status": "success",
+  "items": [
+    {
+      "image": "./img/h1.jpg",
+      "id": 1,
+      "title": "Harry Potter y la piedra filosofal",
+      "author": "J. K. Rowling",
+      "year": 1997,
+      "description": "Harry Potter crece en la casa de sus tíos, los Dursley, quienes le ocultan su verdadera historia familiar; al cumplir Harry once años de edad, empiezan a llegarle cartas de remitente desconocido, que van aumentando en número a medida que sus tíos no dejan que las abra. Las mismas traen la noticia de que el niño ha sido admitido en el Colegio Hogwarts de Magia y Hechicería, ya que, al igual que sus padres, es mago.",
+      "categorie": "Novela",
+      "subgender": "Adventuras",
+      "amount": 5,
+      "price": 1023.32
+    },
+    {
+      "image": "./img/h2.jpg",
+      "id": 2,
+      "title": "Harry Potter y la cámara secreta",
+      "author": "J. K. Rowling",
+      "year": 1998,
+      "description": "Tras el primer curso de Harry en Hogwarts, este regresa al hogar de sus tíos Vernon y Petunia Dursley para pasar el verano allí. Un día, en la habitación de Harry aparece un ser conocido como «elfo doméstico» llamado Dobby, quien le advierte que no debe asistir a su segundo curso del colegio puesto que «estará en peligro mortal»; sin embargo, Harry hace caso omiso a las palabras del elfo. Después de esto, Ron Weasley, y sus hermanos Fred y George llegan a su casa en un coche volador, escapando con Harry.",
+      "categorie": "Novela",
+      "subgender": "Adventuras",
+      "amount": 2,
+      "price": 1100.00
+    },
+    {
+      "image": "./img/h3.jpg",
+      "id": 3,
+      "title": "Harry Potter y el prisionero de Azkaban",
+      "author": "J. K. Rowling",
+      "year": 2000,
+      "description": "El verano se acerca a su fin y encuentra a Harry Potter de 13 años en la casa de sus tíos, los Dursley. Pero luego de un incidente en que el muchacho no logra controlar su temperamento y hechiza a una visitante –Marge, la hermana de Vernon Dursley–, el muchacho huye a bordo del Autobús Noctámbulo rumbo a Londres. Así se entera de la noticia que mantiene en vilo al mundo mágico: un peligroso asesino ha burlado a los carceleros de Azkaban y se ha dado a la fuga.",
+      "categorie": "Novela",
+      "subgender": "Adventuras",
+      "amount": 0,
+      "price": 890.55
+    },
+    {
+      "image": "./img/h4.jpg",
+      "id": 4,
+      "title": "Harry Potter y el cáliz de fuego",
+      "author": "J. K. Rowling",
+      "year": 2001,
+      "description": "A lo largo de las tres novelas anteriores pertenecientes a la saga de Harry Potter, el protagonista, Harry Potter lucha con las dificultades acarreadas por su adolescencia y por el hecho de ser un mago famoso. Cuando Harry era un niño pequeño, Voldemort, el mago tenebroso más poderoso de la historia, había asesinado a los padres de Harry, pero luego se había desvanecido misteriosamente después de que su maldición asesina en contra de Harry rebotase. El hecho había causado que Harry adquiriera fama inmediata y que fuese colocado bajo los cuidados de sus tíos muggles, Petunia y Vernon, quienes a su vez tenían un hijo llamado Dudley Dursley.",
+      "categorie": "Novela",
+      "subgender": "Adventuras",
+      "amount": 3,
+      "price": 1150.99
+    },
+    {
+      "image": "./img/ep1.jpg",
+      "id": 5,
+      "title": "Eleanor & Park",
+      "author": "Rainbow Rowell",
+      "year": 2013,
+      "description": "Ambientada en 1986, relata la historia de dos personajes adolescentes: Park Sheridan, un introvertido chico estadounidense mestizo de ascendencia coreana e irlandés-americana; y Eleanor Douglas, una chica de cabello rojo, tímida y solitaria, que llega, a través de una mudanza, al instituto donde estudia Park. El relato va narrando como estos dos chicos se encuentran de manera casual y como, poco a poco, va surgiendo una relación de carácter más íntimo y trascendente para sus cortas vidas, compartiendo gustos y aficiones y descubriendo valores tales como la amistad, la compañía, el afecto o la llegada del primer amor.",
+      "categorie": "Novela",
+      "subgender": "Literatura juvenil",
+      "amount": 2,
+      "price": 950.00
+    },
+    {
+      "image": "./img/tw1.jpg",
+      "id": 6,
+      "title": "La espada del destino",
+      "author": " Andrzej Sapkowski",
+      "year":   1992,
+      "description": "La vida de un brujo cazador de monstruos no es fácil. Tan pronto puede uno tener que meterse hasta el cuello en un estercolero para eliminar a la bestia carroñera que amenaza a la ciudad, intentando no atrapar una infección incurable, como se puede encontrar unido a la cacería de uno de los últimos dragones, en la que la cuestión no es si los cazadores conseguirán matar a la pobre bestia, sino qué pasará cuando tengan que repartirse el botín. Magos, príncipes, estarostas, voievodas, druidas, vexlings, dríadas, juglares y criaturas de todo pelaje pueblan esta tierra, enzarzados en conflictos de supervivencia, codicia y amor, y entre ellos avanza, solitario, el brujo Geralt de Rivia. Andrzej Sapkowski es el gran renovador de la literatura fantástica de nuestros tiempos, un genio del lenguaje y la caracterización cuya prosa ya ha hechizado a millones de lectores en todo el mundo.",
+      "categorie": "Cuento",
+      "subgender": "Fantasía",
+      "amount": 1,
+      "price": 750.50
+    }
+  ]
+}
