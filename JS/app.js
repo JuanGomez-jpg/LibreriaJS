@@ -11,6 +11,7 @@ const clearCartBtn = document.querySelector(".clear__cart");
 let cart = [];
 let buttonDOM = [];
 let buttonDOM2 = [];
+
 //UI
 class UI {
   displayProducts(obj){
@@ -93,13 +94,14 @@ class UI {
         this.setItemValues(cart);
         //display the items in the cart
         this.addToCart(cartItem);
+
+        this.recommendBook(cartItem);
       });
 
     });
 
     viewButtons.forEach(buttonV => {
       const id = buttonV.dataset.id;
-      console.log(id);
 
       buttonV.addEventListener('click', e=> {
         e.preventDefault();
@@ -181,7 +183,31 @@ class UI {
     this.BookDetails({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id});
   }
 
+  recommendBook ({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) {
+    var imageP = image;
+    var imageP2 = "." + imageP;
+    localStorage.setItem("id",id);
+    localStorage.setItem("imag",imageP2);
+    localStorage.setItem("tit",title);
+    localStorage.setItem("pri",price);
+    localStorage.setItem("auth",author);
+    localStorage.setItem("ye",year);
+    localStorage.setItem("des",description);
+    localStorage.setItem("cat",categorie);
+    localStorage.setItem("gender",subgender);
+    localStorage.setItem("am",amount);
 
+
+
+  }
+
+  cargarLibros (objects) {
+    let libros = [];
+    //objects.forEach(({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) => {
+      libros.push(objects);
+  //  });
+    console.log(libros);
+  }
 
   show() {
     cartDOM.classList.add("show");
@@ -221,28 +247,37 @@ class UI {
       if (!target) return;
 
       if (targetElement) {
+
         const id = parseInt(target.dataset.id);
         this.removeItem(id);
         cartContent.removeChild(target.parentElement);
+
       } else if (target.classList.contains("increase") ) {
+
         const id = parseInt(target.dataset.id, 10);
         let tempItem = cart.find(item => item.id === id);
         tempItem.amount++;
         Storage.saveCart(cart);
         this.setItemValues(cart);
         target.nextElementSibling.innerText = tempItem.amount;
+
       } else if (target.classList.contains("decrease")) {
+
         const id = parseInt(target.dataset.id, 10);
         let tempItem = cart.find(item => item.id === id);
         tempItem.amount--;
 
         if (tempItem.amount > 0) {
+
           Storage.saveCart(cart);
           this.setItemValues(cart);
           target.previousElementSibling.innerText = tempItem.amount;
+
         } else {
+
           this.removeItem(id);
           cartContent.removeChild(target.parentElement.parentElement);
+
         }
       }
     });
@@ -312,14 +347,34 @@ class Products{
   }
 }
 
+class Books{
+
+  async getBooks(){
+    try{
+      const results = await fetch('./JSON/books.json');
+      const data = await results.json();
+      const products = data.items;
+      return products;
+    }catch (err){
+      console.log(err);
+    }
+
+  }
+}
+
 document.addEventListener('DOMContentLoaded',async () =>{
   const ui = new UI();
   const products = new Products();
+  const books = new Books();
 
   ui.setAPP();
 
   const productsObj = await products.getProducts();
+  const booksObj = await books.getBooks();
+
   ui.displayProducts(productsObj);
+  ui.cargarLibros(booksObj);
+
   Storage.saveProduct(productsObj);
   ui.getButtons();
   ui.cartLogic();

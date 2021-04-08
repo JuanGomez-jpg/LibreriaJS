@@ -33,7 +33,7 @@ function booksDetails() {
         <h4>Año: </h4><p>${year}</p>
         <h4>Categoría: </h4><p>${categorie}</p>
         <h4>Subgénero: </h4><p>${subgender}</p>
-        <h4>Cantidad dishponible: </h4><p>${amount}</p>
+        <h4>Cantidad disponible: </h4><p>${amount}</p>
         <h4>Precio: </h4><p>$${price}</p>
         <h4>Descripción: </h4><p>${description}</p>
     </div>`;
