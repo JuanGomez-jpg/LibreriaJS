@@ -11,6 +11,8 @@ const clearCartBtn = document.querySelector(".clear__cart");
 let cart = [];
 let buttonDOM = [];
 let buttonDOM2 = [];
+var libros = [];
+var booksObj;
 
 //UI
 class UI {
@@ -184,6 +186,7 @@ class UI {
   }
 
   recommendBook ({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) {
+    const librosR = libros;
     var imageP = image;
     var imageP2 = "." + imageP;
     localStorage.setItem("id",id);
@@ -197,16 +200,16 @@ class UI {
     localStorage.setItem("gender",subgender);
     localStorage.setItem("am",amount);
 
+    let recomendados = [];
 
+    for (let i = 0 ; i < booksObj.length; ++i) {
+      if (booksObj[i].subgender === subgender) {
+        recomendados.push(booksObj[i]);
+      }
+    }
+    console.log("Recomendados: ");
+    console.log(recomendados);
 
-  }
-
-  cargarLibros (objects) {
-    let libros = [];
-    //objects.forEach(({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) => {
-      libros.push(objects);
-  //  });
-    console.log(libros);
   }
 
   show() {
@@ -370,10 +373,9 @@ document.addEventListener('DOMContentLoaded',async () =>{
   ui.setAPP();
 
   const productsObj = await products.getProducts();
-  const booksObj = await books.getBooks();
+  booksObj = await books.getBooks();
 
   ui.displayProducts(productsObj);
-  ui.cargarLibros(booksObj);
 
   Storage.saveProduct(productsObj);
   ui.getButtons();
