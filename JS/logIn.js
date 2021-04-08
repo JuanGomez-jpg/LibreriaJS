@@ -3,7 +3,7 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 
 function VolverInicio () {
-    location.href ="http://localhost:63342/node-libreria/index.html?_ijt=2v8pfu4os2lf22j56m1i1liiur";
+    location.href ="http://localhost/node-libreria/";
 }
 
 form.addEventListener('submit', e => {

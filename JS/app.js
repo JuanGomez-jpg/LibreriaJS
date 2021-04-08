@@ -3,7 +3,6 @@ const closeCart = document.querySelector('.close__cart');
 const productDOM = document.querySelector('.product__center');
 const cartDOM = document.querySelector('.cart');
 const cartContent = document.querySelector(".cart__centent");
-const cartContent2 = document.querySelector(".cart__centent2");
 const itemTotals = document.querySelector('.item__total');
 const cartTotal = document.querySelector('.cart__total');
 const overlay = document.querySelector(".cart__overlay");
@@ -161,18 +160,27 @@ class UI {
     cartContent.appendChild(div);
   }
 
-  viewProduct ({title, price, image, id}) {
-    let div = document.createElement("div");
-    console.log(title);
-    div.innerHTML = `<img src=${image}>
-          <div>
-            <h3>${title}</h3>
-            <h3 class="price">$${price}</h3>
-          </div>
-        </div>`;
+  BookDetails ({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) {
+    var imageP = image;
+    var imageP2 = "." + imageP;
+    localStorage.setItem("idLibro",id);
+    localStorage.setItem("image",imageP2);
+    localStorage.setItem("title",title);
+    localStorage.setItem("price",price);
+    localStorage.setItem("author",author);
+    localStorage.setItem("year",year);
+    localStorage.setItem("description",description);
+    localStorage.setItem("categorie",categorie);
+    localStorage.setItem("subgender",subgender);
+    localStorage.setItem("amount",amount);
 
-    cartContent2.appendChild(div);
+    location.href ="http://localhost/node-libreria/pages/productDetails.html";
   }
+
+  viewProduct ({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) {
+    this.BookDetails({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id});
+  }
+
 
 
   show() {
@@ -192,6 +200,7 @@ class UI {
 
     openCart.addEventListener("click", this.show);
     closeCart.addEventListener("click", this.hide);
+
   }
 
   populate(cart) {
@@ -319,15 +328,10 @@ document.addEventListener('DOMContentLoaded',async () =>{
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     alert("Active user " + user.email);
-    userL = user.email;
   } else {
     alert("No active user");
   }
 })
-
-var userLG = function returnUser () {
-  return (userL);
-}
 
 function LogOut () {
   firebase.auth().signOut();
