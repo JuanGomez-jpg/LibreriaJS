@@ -3,6 +3,7 @@ const closeCart = document.querySelector('.close__cart');
 const productDOM = document.querySelector('.product__center');
 const cartDOM = document.querySelector('.cart');
 const cartContent = document.querySelector(".cart__centent");
+const cartContent2 = document.querySelector(".cart__centent2");
 const itemTotals = document.querySelector('.item__total');
 const cartTotal = document.querySelector('.cart__total');
 const overlay = document.querySelector(".cart__overlay");
@@ -10,8 +11,7 @@ const clearCartBtn = document.querySelector(".clear__cart");
 
 let cart = [];
 let buttonDOM = [];
-var userL = '';
-
+let buttonDOM2 = [];
 //UI
 class UI {
   displayProducts(obj){
@@ -53,7 +53,7 @@ class UI {
                       <div class="bottom">
                         <div class="btn__group">
                            <button class="btn addToCart" data-id= ${id} >Add to Cart</button>
-                           <button class="btn view">View</button>
+                           <button class="btn view" data-id=${id} >View</button>
                         </div>
                         <div class="price">$${price}</div>
                       </div>
@@ -66,7 +66,10 @@ class UI {
 
   getButtons() {
     const buttons = [...document.querySelectorAll(".addToCart")];
+    const viewButtons = [...document.querySelectorAll(".view")];
+
     buttonDOM = buttons;
+    buttonDOM2 = viewButtons;
 
     buttons.forEach(button => {
       const id = button.dataset.id;
@@ -94,6 +97,24 @@ class UI {
       });
 
     });
+
+    viewButtons.forEach(buttonV => {
+      const id = buttonV.dataset.id;
+      console.log(id);
+
+      buttonV.addEventListener('click', e=> {
+        e.preventDefault();
+        //Get product from products
+        const cartItem = {...Storage.getProduct(id),amount: 1};
+        //display the items in the cart
+        this.viewProduct(cartItem);
+
+      });
+
+    });
+
+
+
   }
 
   setItemValues(cart) {
@@ -139,6 +160,20 @@ class UI {
 
     cartContent.appendChild(div);
   }
+
+  viewProduct ({title, price, image, id}) {
+    let div = document.createElement("div");
+    console.log(title);
+    div.innerHTML = `<img src=${image}>
+          <div>
+            <h3>${title}</h3>
+            <h3 class="price">$${price}</h3>
+          </div>
+        </div>`;
+
+    cartContent2.appendChild(div);
+  }
+
 
   show() {
     cartDOM.classList.add("show");

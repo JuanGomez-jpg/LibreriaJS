@@ -123,7 +123,7 @@ body {
     width: 100%;
     padding: 1.5rem 0;
     line-height: 1rem;
-    background-color: black;
+    background-color: var(--black);
 }
 
 .nav__center {
@@ -135,7 +135,7 @@ body {
 
 .nav__logo {
     font-size: 2rem;
-    color: white;
+    color: var(--white);
     text-align: center;
 
 }
@@ -150,8 +150,8 @@ body {
     font-size: 1.7rem;
     margin-right: 2rem;
     padding: 1.3rem 1.5rem;
-    color: black;
-    background-color: white;
+    color: var(--black);
+    background-color: var(--yellow);
 }
 
 .login:focus {
