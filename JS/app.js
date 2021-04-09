@@ -1,18 +1,34 @@
 const openCart = document.querySelector('.cart__icon');
+const openRecommended = document.querySelector('.recommended__icon');
+
 const closeCart = document.querySelector('.close__cart');
+const closeRecommended = document.querySelector('.close__recommended');
+
 const productDOM = document.querySelector('.product__center');
+const bookDOM = document.querySelector('.recommended__center');
+
 const cartDOM = document.querySelector('.cart');
+const recommendedDOM = document.querySelector('.recommended__cart');
+
 const cartContent = document.querySelector(".cart__centent");
+const recommendedContent = document.querySelector('.recommended__centent');
+
 const itemTotals = document.querySelector('.item__total');
 const cartTotal = document.querySelector('.cart__total');
+
 const overlay = document.querySelector(".cart__overlay");
+const overlayRecommended = document.querySelector('.recommended__overlay');
+
 const clearCartBtn = document.querySelector(".clear__cart");
 
+
 let cart = [];
+let reco = [];
 let buttonDOM = [];
 let buttonDOM2 = [];
 var libros = [];
 var booksObj;
+let recomendados = [];
 
 //UI
 class UI {
@@ -66,6 +82,26 @@ class UI {
     productDOM.innerHTML = results;
   }
 
+  displayRecommended(obje){
+
+    let diva = document.createElement("div");
+
+    diva.classList.add('recommended__item');
+
+    obje.forEach(({title,image,id,price}) => {
+      diva.innerHTML += `<img src=${image}>
+            <div>
+              <h3>${title}</h3>
+              <h3 class="price">$${price}</h3>
+            </div>
+          </div>`;
+
+        });
+
+    recommendedContent.appendChild(diva);
+
+  }
+
   getButtons() {
     const buttons = [...document.querySelectorAll(".addToCart")];
     const viewButtons = [...document.querySelectorAll(".view")];
@@ -97,7 +133,11 @@ class UI {
         //display the items in the cart
         this.addToCart(cartItem);
 
+        //Obtain all recommended books
         this.recommendBook(cartItem);
+        //display the recommended books on list
+        this.displayRecommended(recomendados);
+        
       });
 
     });
@@ -186,6 +226,7 @@ class UI {
   }
 
   recommendBook ({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) {
+    //Tomo el libro por el cual se recomendarán más libros
     const librosR = libros;
     var imageP = image;
     var imageP2 = "." + imageP;
@@ -200,16 +241,16 @@ class UI {
     localStorage.setItem("gender",subgender);
     localStorage.setItem("am",amount);
 
-    let recomendados = [];
+    //Comparo cada uno de los libros por el subgénero literario con el añadido al carrito
+    //para así guardar en un arreglo todas las coincidencias con el que está
+    //en el carrito
 
+    recomendados = [];
     for (let i = 0 ; i < booksObj.length; ++i) {
       if (booksObj[i].subgender === subgender) {
         recomendados.push(booksObj[i]);
       }
     }
-    console.log("Recomendados: ");
-    console.log(recomendados);
-
   }
 
   show() {
@@ -217,9 +258,20 @@ class UI {
     overlay.classList.add("show");
   }
 
+  showR() {
+    recommendedDOM.classList.add("show");
+    overlayRecommended.classList.add("show");
+  }
+
   hide() {
     cartDOM.classList.remove("show");
     overlay.classList.remove("show");
+
+  }
+
+  hideR () {
+    recommendedDOM.classList.remove("show");
+    overlayRecommended.classList.remove("show");
   }
 
   setAPP() {
@@ -230,10 +282,24 @@ class UI {
     openCart.addEventListener("click", this.show);
     closeCart.addEventListener("click", this.hide);
 
+
+  }
+
+  setAPPR() {
+   // reco = Storage.getCart();
+   // this.setItemValues(reco);
+   // this.populate(reco);
+
+    openRecommended.addEventListener("click", this.showR);
+    closeRecommended.addEventListener("click", this.hideR);
   }
 
   populate(cart) {
     cart.forEach(item => this.addToCart(item));
+  }
+
+  populateR(reco) {
+    reco.forEach(item => this.addToRecommended(item));
   }
 
   cartLogic() {
@@ -321,6 +387,8 @@ class Storage{
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 
+  /*- */
+
   static getProduct(id) {
     const products = JSON.parse(localStorage.getItem("products"));
     return products.find(product => product.id === parseFloat(id, 10));
@@ -371,6 +439,7 @@ document.addEventListener('DOMContentLoaded',async () =>{
   const books = new Books();
 
   ui.setAPP();
+  ui.setAPPR();
 
   const productsObj = await products.getProducts();
   booksObj = await books.getBooks();
