@@ -97,40 +97,89 @@ li {
 .signup{
   display: inline-block;
   font-size: 2rem;
-  margin-right: 2rem;
   padding: 1.3rem 1.5rem;
   color: white;
   background-color: #777777;
+  visibility: visible;
 }
 
 .signup:focus {
   outline: none;
 }
 
+.signup:hover {
+  display: inline-block;
+  font-size: 2rem;
+  padding: 1.3rem 1.5rem;
+  color: black;
+  background-color: #e7e7e7;
+}
+
 .login{
   display: inline-block;
   font-size: 2rem;
-  margin-right: 2rem;
   padding: 1.3rem 1.5rem;
   color: white;
   background-color: #777777;
+  visibility: visible;
 }
 
 .login:focus {
   outline: none;
 }
 
+.login:hover {
+  display: inline-block;
+  font-size: 2rem;
+  padding: 1.3rem 1.5rem;
+  color: black;
+  background-color: #e7e7e7;
+}
+
 .logout{
   display: inline-block;
   font-size: 2rem;
-  margin-right: 2rem;
   padding: 1.3rem 1.5rem;
   color: white;
   background-color: #777777;
+  visibility: visible;
 }
 
 .logout:focus {
   outline: none;
+}
+
+.logout:hover {
+  display: inline-block;
+  font-size: 2rem;
+  padding: 1.3rem 1.5rem;
+  color: black;
+  background-color: #e7e7e7;
+}
+
+.proceed__ToCheck {
+  display: inline-block;
+  font-size: 2rem;
+  padding: 1.3rem 1.5rem;
+  color: white;
+  background-color: #777777;
+  visibility: visible;
+}
+
+.proceed__ToCheck:focus {
+  outline: none;
+}
+
+.proceed__ToCheck:hover {
+  display: inline-block;
+  font-size: 2rem;
+  padding: 1.3rem 1.5rem;
+  color: black;
+  background-color: #e7e7e7;
+}
+
+.nav__right {
+  float: right;
 }
 
 .cart__icon {
@@ -211,17 +260,18 @@ li {
   display: inline-block;
   border: 1px solid black;
   padding: 1rem 1.8rem;
-  color: black;
+  color: #6e6e66;
   font-weight: 500;
   font-size: 1.7rem;
   cursor: pointer;
   transition: all 300ms ease-in-out;
+  background-color: whitesmoke;
 }
 
 .btn:hover {
   background-color: rgba(245,255,232,0);
   color: black;
-  border: 3px solid gray;
+  border: 1px solid rgb(201, 201, 201);
 }
 
 .price {

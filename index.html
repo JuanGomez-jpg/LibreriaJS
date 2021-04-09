@@ -29,22 +29,26 @@
         </div>
 
         <ul class="nav__list">
+            <h4 onload="ReturnUser()"></h4>
             <div class="recommended__icon">
                 <div class="recommended__logo">
                     <h4>Recomendados</h4>
                 </div>
-                <!-- <span class="item__total">0</span> -->
             </div>
-            <a href="pages/login.html" class="login">Login</a>
-            <a href="pages/signup.html" class="signup">Sign Up</a>
-            <a href="#" onclick="LogOut()" class="logout">Log Out</a>
+            
             <div class="cart__icon">
                 <h2>Carrito de Compras</h2>
                 <span class="item__total">0</span>
             </div>
-            <h4 onload="ReturnUser()"></h4>
         </ul>
-
+        <ul>
+            <div class="nav__right">
+                <a href="pages/login.html" onclick="hideLogin();" id="login" class="login">Login</a>
+                <a href="pages/signup.html" class="signup" id="signup">Sign Up</a>
+                <a href="#" onclick="LogOut()" onclick="showLogin();" class="logout" id="logout" >Log Out</a>
+                <a href="pages/checkOut.html" onclick="" class="proceed__ToCheck" id="proceed__ToCheck" >Comprar Ahora</a>
+           </div>
+        </ul>
 
     </div>
 </nav>

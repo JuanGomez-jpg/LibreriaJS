@@ -21,6 +21,11 @@ const overlayRecommended = document.querySelector('.recommended__overlay');
 
 const clearCartBtn = document.querySelector(".clear__cart");
 
+const btnSignUp = document.querySelector(".signup");
+const btnLogOut = document.querySelector(".logout");
+const btnComprar = document.querySelector(".proceed__ToCheck");
+
+window.onload =   showLogin();
 
 let cart = [];
 let reco = [];
@@ -70,8 +75,8 @@ class UI {
                       </div>
                       <div class="bottom">
                         <div class="btn__group">
-                           <button class="btn addToCart" data-id= ${id} >Add to Cart</button>
-                           <button class="btn view" data-id=${id} >View</button>
+                           <button class="btn addToCart" data-id= ${id} >Añadir al carrito</button>
+                           <button class="btn view" data-id=${id} >Ver</button>
                         </div>
                         <div class="price">$${price}</div>
                       </div>
@@ -113,13 +118,13 @@ class UI {
       const id = button.dataset.id;
       const inCart = cart.find(item => item.id === parseFloat(id, 10));
       if(inCart) {
-        button.innerText = 'In Cart';
+        button.innerText = 'En carrito';
         button.disable = true;
       }
 
       button.addEventListener('click', e=> {
         e.preventDefault();
-        e.target.innerText = 'In Cart';
+        e.target.innerText = 'En carrito';
         e.target.disable = true;
 
         //Get product from products
@@ -284,8 +289,6 @@ class UI {
 
     openCart.addEventListener("click", this.show);
     closeCart.addEventListener("click", this.hide);
-
-
   }
 
   setAPPR() {
@@ -371,7 +374,7 @@ class UI {
 
     let button = this.singleButton(id);
     button.disabled = false;
-    button.innerText = "Add to Cart";
+    button.innerText = "Añadir al carrito";
   }
 
   singleButton(id) {
@@ -463,13 +466,29 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 })
 
+function hideLogin() {
+  document.getElementById("login").style.visibility = "hidden";
+  document.getElementById("signup").style.visibility = "hidden";
+  document.getElementById("logout").style.visibility = "visible";
+  document.getElementById("proceed__ToCheck").style.visibility = "visible";
+}
+
+function showLogin() {
+  document.getElementById("login").style.visibility = "visible";
+  document.getElementById("signup").style.visibility = "visible";
+  document.getElementById("logout").style.visibility = "hidden";
+  document.getElementById("proceed__ToCheck").style.visibility = "hidden";
+}
+
 function ReturnUser (user) {
   alert("¡Hola de nuevo " + user + "!");
+  hideLogin();
 }
 
 function LogOut () {
   firebase.auth().signOut();
   alert("Se ha cerrado sesión");
+  showLogin();
 }
 
 
