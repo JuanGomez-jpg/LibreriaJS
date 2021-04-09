@@ -6,12 +6,14 @@ var libros = [];
 
 function VolverInicio () {
     location.href ="http://localhost/node-libreria/";
-}
+} 
 
 function displayProducts(obj){
     let results = '';
     let img = '.';
     obj.forEach(({title,image,id,price, amount}) => {
+    let subtotal = 0.0;
+    subtotal = parseFloat(price, 2) * parseInt(amount);  
     img = '.';
     img += image;
       results += `<div class="product">
@@ -20,36 +22,14 @@ function displayProducts(obj){
                     </div>
                     <div class="product__footer">
                       <h1>${title}</h1>
-                      <div class="rating">
-                        <span>
-                          <svg>
-                            <use xlink:href="../img/sprite.svg#icon-star-full"></use>
-                          </svg>
-                        </span>
-                        <span>
-                          <svg>
-                            <use xlink:href="../img/sprite.svg#icon-star-full"></use>
-                          </svg>
-                        </span>
-                        <span>
-                          <svg>
-                            <use xlink:href="../img/sprite.svg#icon-star-full"></use>
-                          </svg>
-                        </span>
-                        <span>
-                          <svg>
-                            <use xlink:href="../img/sprite.svg#icon-star-full"></use>
-                          </svg>
-                        </span>
-                        <span>
-                          <svg>
-                            <use xlink:href="../img/sprite.svg#icon-star-empty"></use>
-                          </svg>
-                        </span>
-                      </div>
                       <div class="bottom">
-                        <div class="price">$${price}</div>
-                        <div class="amount">Cantidad: ${amount}</div>
+                        <div class="price">$${price}
+                        </br>
+                        Cantidad: ${amount}
+                        </br>
+                        </br>
+                        Subtotal: $${subtotal}
+                        </div>
                       </div>
                     </div>
                   </div>`;

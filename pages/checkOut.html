@@ -1,7 +1,10 @@
 <!DOCTYPE>
 
-<html>
+<html lang="spa">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Check Out</title>
     <link rel="stylesheet" href="../CSS/checkOut.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -9,6 +12,20 @@
 </head>
 
 <body>
+
+    <div class="subtotal">
+        <div class="panel">
+            <form class="form">
+                Tipo de envío<br>
+                <input type="radio" id="rapido" value="rapido">
+                <label for="rapido">Rápido</label><br>
+                <input type="radio" id="normal" value="normal">
+                <label for="normal">Normal</label><br><br>
+                <input type="submit" class="submit" value="submit" >
+            </form>
+        </div>
+    </div>
+
     <nav class="nav">
         <div class="nav__center container">
             <div class="nav__logo">
@@ -24,7 +41,10 @@
         </div>
     </section>
 
+
+
     
+
 
 
     <script src="../JS/checkOut.js"></script>
