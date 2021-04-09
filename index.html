@@ -30,23 +30,22 @@
 
         <ul class="nav__list">
             <div class="recommended__icon">
-                <h2>Recommended</h2>
+                <div class="recommended__logo">
+                    <h4>Recomendados</h4>
+                </div>
                 <!-- <span class="item__total">0</span> -->
             </div>
             <a href="pages/login.html" class="login">Login</a>
             <a href="pages/signup.html" class="signup">Sign Up</a>
             <a href="#" onclick="LogOut()" class="logout">Log Out</a>
             <div class="cart__icon">
-                <h2>Cart</h2>
+                <h2>Carrito de Compras</h2>
                 <span class="item__total">0</span>
             </div>
+            <h4 onload="ReturnUser()"></h4>
         </ul>
 
-        <div class="hamburger">
-            <svg>
-                <use xlink:href="./img/sprite.svg#icon-menu"></use>
-            </svg>
-        </div>
+
     </div>
 </nav>
 <!-- Navigation -->
@@ -65,25 +64,19 @@
           <use xlink:href="./img/sprite.svg#icon-cross"></use>
         </svg>
       </span>
-        <h1>Your Cart</h1>
+        <h1>Carrito de Compras</h1>
         <div class="cart__centent">
 
         </div>
 
         <div class="cart__footer">
             <h3>Total: $ <span class="cart__total">0</span></h3>
-            <button class="clear__cart btn">Clear Cart</button>
+            <button class="clear__cart btn">Limpiar carrito</button>
         </div>
     </div>
 </section>
 
-
-<section class="recommended">
-    <div class="recommended__center">
-
-    </div>
-</section>
-
+<!-- Recommended books -->
 <section class="recommended__overlay">
     <div class="recommended__cart">
         <span class="close__recommended">
@@ -91,7 +84,7 @@
                 <use xlink:href="./img/sprite.svg#icon-cross"></use>
             </svg>
         </span>
-        <h1>Recommended books</h1>
+        <h1>Libros Recomendados</h1>
         <div class="recommended__centent">
 
         </div>

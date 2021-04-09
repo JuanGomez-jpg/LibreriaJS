@@ -558,7 +558,7 @@ li {
   cursor: pointer;
 }
 
-.recommended__icon h2 {
+.recommended__icon h4 {
   font-weight: 700;
   color: #f0f0f0;
 }
@@ -579,7 +579,6 @@ li {
   font-weight: 700;
   border-radius: 50%;
 }
-
 
 .recommended__footer {
   text-align: center;
@@ -603,4 +602,9 @@ li {
     font-size: 1.6rem;
     margin-bottom: 1rem;
   }
+}
+
+.recommended__logo {
+  text-align: left;
+  margin-right: 1.4em;
 }

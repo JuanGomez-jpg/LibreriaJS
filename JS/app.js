@@ -245,7 +245,10 @@ class UI {
     //para así guardar en un arreglo todas las coincidencias con el que está
     //en el carrito
 
+    recomendados = null;
     recomendados = [];
+
+
     for (let i = 0 ; i < booksObj.length; ++i) {
       if (booksObj[i].subgender === subgender) {
         recomendados.push(booksObj[i]);
@@ -453,15 +456,20 @@ document.addEventListener('DOMContentLoaded',async () =>{
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
-    alert("Active user " + user.email);
+    //alert("Active user " + user.email);
+    ReturnUser(user.email);
   } else {
-    alert("No active user");
+    //alert("No active user");
   }
 })
 
+function ReturnUser (user) {
+  alert("¡Hola de nuevo " + user + "!");
+}
+
 function LogOut () {
   firebase.auth().signOut();
-  alert("Signed out");
+  alert("Se ha cerrado sesión");
 }
 
 
