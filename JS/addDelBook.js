@@ -1,7 +1,4 @@
 const form = document.getElementById('form');
-
-const username = document.getElementById('username');
-
 const titulo = document.getElementById('titulo');
 const autor = document.getElementById('autor');
 const anio = document.getElementById('año');
@@ -19,10 +16,13 @@ function VolverInicio () {
     location.href ="http://localhost/node-libreria/";
 }
 
-let file = {};
+let file;
+let fileName;
 
 function chooseFile (e) {
     file = e.target.files[0];
+    fileName = file.name;
+    console.log(fileName);
 }
 
 form.addEventListener('submit', e => {
@@ -112,10 +112,10 @@ function checkInputs() {
     }
     
     if(isbnValue === '') {
-        setErrorFor(username, 'ISBN cannot be blank');
+        setErrorFor(isbn, 'ISBN cannot be blank');
         validar = false;
     } else {
-        setSuccessFor(username);
+        setSuccessFor(isbn);
     }
 
     if(descripcionValue === '') {
@@ -129,16 +129,50 @@ function checkInputs() {
 
     if (validar) {
 
-      /*  let email = document.getElementById("email").value;
-        let password = document.getElementById("password").value;
-        const auth = firebase.auth();
-    
-        const promise = auth.createUserWithEmailAndPassword(email, password);
-        promise.catch( e => alert(e.message));
-    
-        alert("Se ha creado tu cuenta " + email);
+        var storageRef = firebase.storage().ref('/bookImages/' + fileName);
+        var uploadTask = storageRef.put(file);
 
-        document.getElementById('form').reset();*/
+        uploadTask.on('state_changed', function(snapshot) {
+
+        }, function(error) {
+
+        }, function() {
+
+            var postKey = firebase.database().ref('Books/').push().key;
+            var downloadURL1;
+
+            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+
+                var updates = {};
+
+                var newBook = {
+                    eventId: postKey,
+                    tittle: tituloValue,
+                    autor: autorValue,
+                    anio: anioValue,
+                    categoria: categoriaValue,
+                    subgenero: subgeneroValue,
+                    editorial: editorialValue,
+                    cantidad: cantValue,
+                    precio: precioValue,
+                    isbn: isbnValue,
+                    descripcion: descripcionValue,
+                    url: downloadURL
+                };
+    
+                var book = JSON.parse(JSON.stringify(newBook));
+    
+                updates[`/Books/ ${postKey}`] = book;
+    
+                firebase.database().ref().update(updates);
+    
+
+              });
+              
+              document.getElementById('form').reset();
+
+
+        });
 
     }
 
