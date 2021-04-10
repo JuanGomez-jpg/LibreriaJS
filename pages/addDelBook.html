@@ -1,0 +1,134 @@
+<!DOCTYPE>
+
+<html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    
+        <!-- StyleSheet -->
+        <link rel="stylesheet" href="../CSS/addDelBook.css" />
+        <title>
+            Admin Books
+        </title>
+    </head>
+
+    <body>
+        <nav class="nav">
+            <div class="nav__center container">
+                <div class="nav__logo">
+                    <h1 onclick="VolverInicio()">ADMIN BOOKS</h1>
+                </div>
+            </div>
+        </nav>
+
+
+            <div class="container">
+
+                <div class="header">
+                    <h2>Agregar libro</h2>
+                </div>
+
+                <form id="form" class="form">
+
+                    <div class="form-control">
+                        <label for="titulo">Título</label>
+                        <input type="text" placeholder="Título" id="titulo" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="autor">Autor</label>
+                        <input type="text" placeholder="Autor" id="autor" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="año">Año</label>
+                        <input type="text" placeholder="Año" id="año" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="categoria">Categoría</label>
+                        <input type="text" placeholder="Categoría" id="categoria" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="subgenero">Subgénero</label>
+                        <input type="text" placeholder="Subgénero" id="subgenero" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="editorial">Editorial</label>
+                        <input type="text" placeholder="Editorial" id="editorial" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="cDisponible">Cantidad disponible</label>
+                        <input type="number" placeholder="Cantidad disponible" id="cDisponible" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="precio">Precio</label>
+                        <input type="text" placeholder="Precio" id="precio" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="isbn">ISBN</label>
+                        <input type="text" placeholder="ISBN" id="isbn" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="descripcion">Descripción</label>
+                        <input type="text" placeholder="Descripción" id="descripcion" class="descripcion" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="imagen">Imagen</label>
+                        <input type="file" onchange="chooseFile(event)"  id="imagen" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <button id="btnSaveUser">Agregar</button>
+
+                </form>
+            </div>
+
+    <script src="../JS/addDelBook.js"></script>
+    </body>
+
+</html>
