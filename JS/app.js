@@ -223,6 +223,7 @@ class UI {
     localStorage.setItem("subgender",subgender);
     localStorage.setItem("amount",amount);
 
+
     location.href ="http://localhost/node-libreria/pages/productDetails.html";
   }
 
