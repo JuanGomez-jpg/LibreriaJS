@@ -94,6 +94,22 @@ li {
   align-items: center;
 }
 
+.agregarLibro{
+  display: inline-block;
+  font-size: 2rem;
+  padding: 1.3rem 1.5rem;
+  color: white;
+  background-color: #777777;
+  visibility: visible;
+  justify-content: space-between;
+  position: fixed;
+  visibility: visible;
+}
+
+.agregarLibro:focus {
+  outline: none;
+}
+
 .signup{
   display: inline-block;
   font-size: 2rem;

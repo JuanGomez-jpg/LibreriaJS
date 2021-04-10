@@ -66,7 +66,7 @@ function checkInputs() {
         const promise = auth.createUserWithEmailAndPassword(email, password);
         promise.catch( e => alert(e.message));
     
-        alert("Se ha creado tu cuenta" + email);
+        alert("Se ha creado tu cuenta " + email);
 
         document.getElementById('form').reset();
 

@@ -27,6 +27,8 @@ const btnComprar = document.querySelector(".proceed__ToCheck");
 
 window.onload =   showLogin();
 
+let activeUser = '';
+
 let cart = [];
 let reco = [];
 let buttonDOM = [];
@@ -462,6 +464,7 @@ firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     //alert("Active user " + user.email);
     ReturnUser(user.email);
+    //activeUser = user.email;
   } else {
     //alert("No active user");
   }
@@ -472,6 +475,12 @@ function hideLogin() {
   document.getElementById("signup").style.visibility = "hidden";
   document.getElementById("logout").style.visibility = "visible";
   document.getElementById("proceed__ToCheck").style.visibility = "visible";
+
+  if (activeUser === "admin@admin.com") {
+    document.getElementById("agregarLibro").style.visibility = "visible";
+    document.getElementById("proceed__ToCheck").style.visibility = "hidden";
+  }
+
 }
 
 function showLogin() {
@@ -479,10 +488,12 @@ function showLogin() {
   document.getElementById("signup").style.visibility = "visible";
   document.getElementById("logout").style.visibility = "hidden";
   document.getElementById("proceed__ToCheck").style.visibility = "hidden";
+  document.getElementById("agregarLibro").style.visibility = "hidden";
 }
 
 function ReturnUser (user) {
   alert("¡Hola de nuevo " + user + "!");
+  activeUser = user;
   hideLogin();
 }
 
