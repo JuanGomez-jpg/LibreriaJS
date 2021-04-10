@@ -17,11 +17,14 @@
         <div class="panel">
             <form class="form">
                 Tipo de envío<br>
-                <input type="radio" id="rapido" value="rapido">
-                <label for="rapido">Rápido</label><br>
-                <input type="radio" id="normal" value="normal">
-                <label for="normal">Normal</label><br><br>
-                <input type="submit" class="submit" value="submit" >
+                <input type="radio" onclick="setPrecioEnviarR();" id="rapido" value="rapido" name="answer">
+                <label for="rapido" onclick="setPrecioEnviarR();">Rápido</label><br>
+                <input type="radio" onclick="setPrecioEnviarN();" id="normal" value="normal" checked name="answer">
+                <label for="normal" onclick="setPrecioEnviarN();">Normal</label><br><br>
+                <div class="subtotal__books">
+
+                </div>
+                <input type="submit" class="submit" value="submit" name="answer">
             </form>
         </div>
     </div>

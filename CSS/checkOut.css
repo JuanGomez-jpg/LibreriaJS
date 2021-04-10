@@ -74,7 +74,7 @@ body {
   .product__center {
     padding: 0 3rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: 3rem 1rem;
   }
   
@@ -135,11 +135,12 @@ body {
     grid-area: 1 / col4-start / last-line / 6;
     align-self: auto;
     position: absolute;
-    background-color: #ededed;
+    background-color: white;
     border-radius: 5px;
     border: 1px solid black;
     align-content: center;
     padding: 3em 4em;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, .4);
   }
 
   .form{
