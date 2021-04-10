@@ -153,3 +153,8 @@ body {
     padding: .5em 3em;
     color: brown;
   }
+
+
+ .form__r{
+   visibility: hidden;
+ }

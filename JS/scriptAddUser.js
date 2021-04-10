@@ -3,7 +3,7 @@ function VolverInicio () {
     location.href ="http://localhost/node-libreria/";
 }
 
-/*
+
 function addAccount () {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
@@ -14,7 +14,7 @@ function addAccount () {
 
     alert("Se ha creado tu cuenta" + email);
     VolverInicio();
-}*/
+}
 
 function addUser() {
     let username = document.getElementById("username").value;

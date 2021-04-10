@@ -5,10 +5,14 @@ const subTotalDOM = document.querySelector('.subtotal__books');
 
 
 var libros = [];
+let tipoEnvio = '';
 let subtotal = 0.0;
 let precio = 0.0;
 let cantidad = 0;
 let total = 0.0;
+let totalFinal = 0.0;
+let iva = 0.0;
+let costoEnvioR = 0.0;
 tipo = true;
 
 function VolverInicio () {
@@ -18,13 +22,59 @@ function VolverInicio () {
 function setPrecioEnviarN () {
   console.log("Normal");
   tipo = true;
+  document.getElementById("form__r").style.visibility = "hidden";
   displaySubTotal();
 }
 
+
+function realizarOperacionesR () {
+  if (tipoEnvio === "UPS") {
+    costoEnvioR = 175;
+  } else if (tipoEnvio === "DHL") {
+    costoEnvioR = 200;
+  } else if (tipoEnvio === "Estafeta") {
+    costoEnvioR = 245;
+  } else {
+    costoEnvioR = 220;
+  }
+
+  totalCE = total + costoEnvioR + iva;
+
+  totalCE = parseFloat(totalCE.toFixed(2));
+}
+
+
 function setPrecioEnviarR () {
-  console.log("Rapido");
   tipo = false;
-  displaySubTotal();
+  tipoEnvio = "UPS";
+  document.getElementById("form__r").style.visibility = "visible";
+  document.getElementById('form__r').reset();
+  realizarOperacionesR ();
+  displaySubTotalR();
+}
+
+function setPrecioUPS() {
+  tipoEnvio = "UPS";
+  realizarOperacionesR ();
+  displaySubTotalR();
+}
+
+function setPrecioDHL() {
+  tipoEnvio = "DHL";
+  realizarOperacionesR ();
+  displaySubTotalR();
+}
+
+function setPrecioEst() {
+  tipoEnvio = "Estafeta";
+  realizarOperacionesR ();
+  displaySubTotalR();
+}
+
+function setPrecioFedex() {
+  tipoEnvio = "Fedex";
+  realizarOperacionesR ();
+  displaySubTotalR();
 }
 
 
@@ -59,12 +109,14 @@ function displayProducts(obj){
       total += parseFloat(price, 2) * parseInt(amount);  
     });
 
-    let iva, totalCE;
+    let totalCE;
     iva = 0.0;
     totalCE = 0.0;
     iva = total * .16;
-    total += iva;
+    totalFinal += iva;
     total = parseFloat(total.toFixed(2));
+    totalFinal = parseFloat(totalFinal.toFixed(2));
+    iva = parseFloat(iva.toFixed(2));
 
     bookDOM.innerHTML = results;
 
@@ -74,21 +126,41 @@ function displayProducts(obj){
   function displaySubTotal(){
     let tipoE = 0.00;
     if (tipo) {
-      totalCE = total + 20.00;
-      tipoE = 20.00;
+      totalCE = total + costoEnvioR + iva;
+      tipoE = 60.00;
     } else {
-      totalCE = total + 100.00
+      totalCE = total + costoEnvioR + iva
       tipoE = 100.00;
     }
+
+    totalCE = parseFloat(totalCE.toFixed(2));
     let results = '';
     results = `<div>
-        <br>
-        Subtotal: $${total}
-        <br>
-        Envío: $${tipoE}
-        <br>
-        Total: $${totalCE}
+          <br>
+          Subtotal: $${total}
+          <br>
+          IVA: $${iva}
+          <br>
+          Envío: $${tipoE}
+          <br>
+          Total: $${totalCE}
+        </div>`;
 
+    subTotalDOM.innerHTML = results;
+  }
+
+
+  function displaySubTotalR(){
+    let results = '';
+    results = `<div>
+          <br>
+          Subtotal: $${total}
+          <br>
+          IVA: $${iva}
+          <br>
+          Envío: $${costoEnvioR}
+          <br>
+          Total: $${totalCE}
         </div>`;
 
     subTotalDOM.innerHTML = results;
