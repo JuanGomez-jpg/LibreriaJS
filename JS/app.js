@@ -457,7 +457,7 @@ document.addEventListener('DOMContentLoaded',async () =>{
   ui.getButtons();
   ui.cartLogic();
 });
-
+/*
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     //alert("Active user " + user.email);
@@ -465,7 +465,7 @@ firebase.auth().onAuthStateChanged(function (user) {
   } else {
     //alert("No active user");
   }
-})
+})*/
 
 function hideLogin() {
   document.getElementById("login").style.visibility = "hidden";

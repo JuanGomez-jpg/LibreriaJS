@@ -67,10 +67,14 @@ function checkInputs() {
         promise.catch( e => alert(e.message));
     
         alert("Se ha creado tu cuenta" + email);
-        //VolverInicio();
+
+        document.getElementById('form').reset();
+
     }
 
 }
+
+
 
 function setErrorFor(input, message) {
     const formControl = input.parentElement;
