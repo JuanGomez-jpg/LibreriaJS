@@ -26,7 +26,6 @@ function setPrecioEnviarN () {
   displaySubTotal();
 }
 
-
 function realizarOperacionesR () {
   if (tipoEnvio === "UPS") {
     costoEnvioR = 175;
@@ -42,7 +41,6 @@ function realizarOperacionesR () {
 
   totalCE = parseFloat(totalCE.toFixed(2));
 }
-
 
 function setPrecioEnviarR () {
   tipo = false;
@@ -77,37 +75,40 @@ function setPrecioFedex() {
   displaySubTotalR();
 }
 
-
 function displayProducts(obj){
     let results = '';
     let img = '.';
     total = 0.0;
-    obj.forEach(({title,image,id,price, amount}) => {
-    subtotal = 0.0;
-    precio = parseFloat(price, 2);
-    cantidad = parseInt(amount);
-    subtotal = parseFloat(price, 2) * parseInt(amount);  
-    img = '.';
-    img += image;
-      results += `<div class="product">
-                    <div class="image__container">
-                      <img src=${img} alt="${id}" />
-                    </div>
-                    <div class="product__footer">
-                      <h1>${title}</h1>
-                      <div class="bottom">
-                        <div class="price">$${price}
-                        </br>
-                        Cantidad: ${amount}
-                        </br>
-                        </br>
-                        Total: $${subtotal}
+
+    var keys = Object.keys(obj);
+
+    for(let i =0 ; i < keys.length; ++i) {
+      var currentObj = obj[keys[i]];
+      subtotal = 0.0;
+      precio = parseFloat(currentObj.precio, 2);
+      cantidad = parseInt(currentObj.cantidad);
+      subtotal = parseFloat(currentObj.precio, 2) * parseInt(currentObj.cantidad);  
+
+        results += `<div class="product">
+                      <div class="image__container">
+                        <img src=${currentObj.url} alt="${currentObj.id}" />
+                      </div>
+                      <div class="product__footer">
+                        <h1>${currentObj.tittle}</h1>
+                        <div class="bottom">
+                          <div class="price">$${currentObj.precio}
+                          </br>
+                          Cantidad: ${cantidad}
+                          </br>
+                          </br>
+                          Total: $${subtotal}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>`;
-      total += parseFloat(price, 2) * parseInt(amount);  
-    });
+                    </div>`;
+        total += parseFloat(currentObj.precio, 2) * parseInt(currentObj.cantidad);  
+
+    }
 
     let totalCE;
     iva = 0.0;

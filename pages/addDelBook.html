@@ -33,11 +33,9 @@
 
 
             <div class="container">
-
                 <div class="header">
                     <h2>Agregar libro</h2>
                 </div>
-
                 <form id="form" class="form">
 
                     <div class="form-control">
@@ -127,11 +125,30 @@
                         <i class="fas fa-exclamation-circle"></i>
                         <small>Error message</small>
                     </div>
-
                     <button id="btnSaveUser">Agregar</button>
-
                 </form>
             </div>
+
+
+            <div class="containerE">
+                <div class="headerE">
+                    <h2>Eliminar Libro</h2>
+                </div>
+                <form id="formE" class="formE">
+
+                    <div class="form-controlE">
+                        <label for="isbnE">ISBN</label>
+                        <input type="text" placeholder="ISBN" id="isbnE" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+                    <button id="btnSaveUser" class="btnEliminar" >Eliminar</button>
+                </form>
+            </div>
+
+
+
 
     <script src="../JS/addDelBook.js"></script>
     </body>

@@ -9,6 +9,7 @@ const cant = document.getElementById('cDisponible');
 const precio = document.getElementById('precio');
 const isbn = document.getElementById('isbn');
 const descripcion = document.getElementById('descripcion');
+const isbnE = document.getElementById('isbnE');
 const imagen = document.getElementById('imagen');
 
 
@@ -17,22 +18,26 @@ function VolverInicio () {
 }
 
 
-
 let file;
 let fileName;
 let id;
+let url;
 
 function chooseFile (e) {
     file = e.target.files[0];
     fileName = file.name;
     //console.log(fileName);
-
+    id = 0;
     var allBooks;
     allBooks = JSON.parse(localStorage.getItem("products"));
-
+    console.log(allBooks);
     var keys = Object.keys(allBooks);
 
-    id = keys.length + 1;
+    for (let i = 0 ; i < keys.length ; ++i) {
+        var currentObj = allBooks[keys[i]];
+        id = currentObj.id;
+    }
+    id = id + 1;
 
 }
 
@@ -40,6 +45,12 @@ form.addEventListener('submit', e => {
     e.preventDefault();
 
     checkInputs();
+});
+
+formE.addEventListener('submit', e => {
+    e.preventDefault();
+
+    EliminarLibro();
 });
 
 function checkInputs() {
@@ -183,15 +194,14 @@ function checkInputs() {
               });
               
               document.getElementById('form').reset();
-
+              
 
         });
+        
 
     }
 
 }
-
-
 
 function setErrorFor(input, message) {
     const formControl = input.parentElement;
@@ -205,3 +215,42 @@ function setSuccessFor(input) {
     formControl.className = 'form-control success';
 }
 
+
+
+function EliminarLibro () {
+    let booksDel;
+    booksDel = JSON.parse(localStorage.getItem("products"));
+    //console.log(booksDel);
+    var keys = Object.keys(booksDel);
+    //console.log(keys);
+    let keyBook;
+    let valid = false;
+
+    for (let i = 0 ; i < keys.length ; ++i) {
+        var currentObj = booksDel[keys[i]];
+        if (currentObj.isbn == isbnE.value) {
+            keyBook = currentObj.eventId;
+            url = currentObj.url;
+            valid = true;
+            //console.log(keyBook);
+            break;
+        }
+    }
+
+    if (valid) {
+
+        var query = firebase.database().ref("Books").orderByChild("eventId").equalTo(keyBook);
+        query.on('child_added', (snapshot) => {
+        snapshot.ref.remove();
+
+        });
+
+        var deleteB = firebase.storage().refFromURL(url);
+        deleteB.delete();
+
+        //window.location.reload();
+
+        }
+
+        document.getElementById('formE').reset();
+}

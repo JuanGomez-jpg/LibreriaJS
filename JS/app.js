@@ -611,7 +611,7 @@ firebase.auth().onAuthStateChanged(function (user) {
   } else {
     //alert("No active user");
   }
-})
+});
 
 function hideLogin() {
   document.getElementById("login").style.visibility = "hidden";
@@ -645,6 +645,3 @@ function LogOut () {
   alert("Se ha cerrado sesión");
   showLogin();
 }
-
-
-
