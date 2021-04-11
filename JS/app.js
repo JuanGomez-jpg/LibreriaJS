@@ -41,10 +41,10 @@ let recomendados = [];
 class UI {
   displayProducts(obj){
     let results = '';
-    console.log(obj);
+    //console.log(obj);
 
     var keys = Object.keys(obj);
-    console.log(keys);
+    //console.log(keys);
 
     for(let i =0 ; i < keys.length; ++i) {
 
@@ -85,8 +85,8 @@ class UI {
                       </div>
                       <div class="bottom">
                         <div class="btn__group">
-                           <button class="btn addToCart" data-id= ${obj.eventId} >Añadir al carrito</button>
-                           <button class="btn view" data-id=${obj.eventId} >Ver</button>
+                           <button class="btn addToCart" data-id= ${currentObj.id} >Añadir al carrito</button>
+                           <button class="btn view" data-id=${currentObj.id} >Ver</button>
                         </div>
                         <div class="price">$${currentObj.precio}</div>
                       </div>
@@ -98,23 +98,22 @@ class UI {
   }
 
   displayRecommended(obje){
-
     let diva = document.createElement("div");
-
     diva.classList.add('recommended__item');
 
-    obje.forEach(({title,image,id,price}) => {
-      diva.innerHTML += `<img src=${image}>
+    var keys = Object.keys(obje);
+
+    for(let i =0 ; i < keys.length; ++i) {
+      var currentObj = obje[keys[i]];
+      diva.innerHTML += `<img src=${currentObj.url}>
             <div>
-              <h3>${title}</h3>
-              <h3 class="price">$${price}</h3>
+              <h3>${currentObj.tittle}</h3>
+              <h3 class="price">$${currentObj.precio}</h3>
             </div>
           </div>`;
 
-        });
-
+    }
     recommendedContent.appendChild(diva);
-
   }
 
   getButtons() {
@@ -126,7 +125,7 @@ class UI {
 
     buttons.forEach(button => {
       const id = button.dataset.id;
-      const inCart = cart.find(item => item.eventId === parseFloat(id, 10));
+      const inCart = cart.find(item => item.id === parseFloat(id, 10));
       if(inCart) {
         button.innerText = 'En carrito';
         button.disable = true;
@@ -138,7 +137,7 @@ class UI {
         e.target.disable = true;
 
         //Get product from products
-        const cartItem = {...Storage.getProduct(id),amount: 1};
+        const cartItem = {...Storage.getProduct(id),cantidad: 1};
         //Add the product to cart
         cart = [...cart, cartItem];
         //Store the product in local storage
@@ -163,9 +162,9 @@ class UI {
       buttonV.addEventListener('click', e=> {
         e.preventDefault();
         //Get product from products
-        const cartItem = {...Storage.getProduct(eventId),amount: 1};
+        const cartItem = {...Storage.getProduct(id)};
         //display the items in the cart
-        this.viewProduct(cartItem);
+        this.BookDetails(cartItem);
 
       });
 
@@ -180,17 +179,18 @@ class UI {
     let itemTotal = 0;
 
     cart.map(item => {
-      tempTotal += item.price * item.amount;
-      itemTotal += item.amount;
+      tempTotal += item.precio * item.cantidad;
+      itemTotal += item.cantidad;
     });
+
     cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
     itemTotals.innerText = itemTotal;
+
   }
 
   addToCart (obj) {
     let div = document.createElement("div");
     div.classList.add('cart__item');
-
 
       div.innerHTML = `<img src=${obj.url}>
       <div>
@@ -198,21 +198,21 @@ class UI {
         <h3 class="price">$${obj.precio}</h3>
       </div>
       <div>
-        <span class="increase" data-id=${obj.eventId}>
+        <span class="increase" data-id=${obj.id}>
           <svg>
-            <use xlink:href="../img/sprite.svg#icon-angle-up"></use>
+            <use xlink:href="./img/sprite.svg#icon-angle-up"></use>
           </svg>
         </span>
         <p class="item__amount">1</p>
-        <span class="decrease" data-id=${obj.eventId}>
+        <span class="decrease" data-id=${obj.id}>
           <svg>
-            <use xlink:href="../img/sprite.svg#icon-angle-down"></use>
+            <use xlink:href="./img/sprite.svg#icon-angle-down"></use>
           </svg>
         </span>
       </div>
-        <span class="remove__item" data-id=${obj.eventId}>
+        <span class="remove__item" data-id=${obj.id}>
           <svg>
-            <use xlink:href="../img/sprite.svg#icon-trash"></use>
+            <use xlink:href="./img/sprite.svg#icon-trash"></use>
           </svg>
         </span>
     </div>`;
@@ -222,43 +222,34 @@ class UI {
     
   }
 
-  BookDetails ({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) {
-    var imageP = image;
-    var imageP2 = "." + imageP;
-    localStorage.setItem("idLibro",id);
-    localStorage.setItem("image",imageP2);
-    localStorage.setItem("title",title);
-    localStorage.setItem("price",price);
-    localStorage.setItem("author",author);
-    localStorage.setItem("year",year);
-    localStorage.setItem("description",description);
-    localStorage.setItem("categorie",categorie);
-    localStorage.setItem("subgender",subgender);
-    localStorage.setItem("amount",amount);
-
+  BookDetails (obj) {
+    localStorage.setItem("idLibro",obj.id);
+    localStorage.setItem("image",obj.url);
+    localStorage.setItem("title",obj.tittle);
+    localStorage.setItem("price",obj.precio);
+    localStorage.setItem("author",obj.autor);
+    localStorage.setItem("year",obj.anio);
+    localStorage.setItem("description",obj.descripcion);
+    localStorage.setItem("categorie",obj.categoria);
+    localStorage.setItem("subgender",obj.subgenero);
+    localStorage.setItem("amount",obj.cantidad);
 
     location.href ="http://localhost/node-libreria/pages/productDetails.html";
   }
 
-  viewProduct ({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) {
-    this.BookDetails({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id});
-  }
-
-  recommendBook ({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) {
+  recommendBook (obj) {
     //Tomo el libro por el cual se recomendarán más libros
     const librosR = libros;
-    var imageP = image;
-    var imageP2 = "." + imageP;
-    localStorage.setItem("id",id);
-    localStorage.setItem("imag",imageP2);
-    localStorage.setItem("tit",title);
-    localStorage.setItem("pri",price);
-    localStorage.setItem("auth",author);
-    localStorage.setItem("ye",year);
-    localStorage.setItem("des",description);
-    localStorage.setItem("cat",categorie);
-    localStorage.setItem("gender",subgender);
-    localStorage.setItem("am",amount);
+    localStorage.setItem("id",obj.id);
+    localStorage.setItem("imag",obj.url);
+    localStorage.setItem("tit",obj.tittle);
+    localStorage.setItem("pri",obj.precio);
+    localStorage.setItem("auth",obj.autor);
+    localStorage.setItem("ye",obj.anio);
+    localStorage.setItem("des",obj.description);
+    localStorage.setItem("cat",obj.categoria);
+    localStorage.setItem("gender",obj.subgenero);
+    localStorage.setItem("am",obj.cantidad);
 
     //Comparo cada uno de los libros por el subgénero literario con el añadido al carrito
     //para así guardar en un arreglo todas las coincidencias con el que está
@@ -267,12 +258,17 @@ class UI {
     recomendados = null;
     recomendados = [];
 
+    var keys = Object.keys(booksObj);
+    //console.log(keys);
 
-    //for (let i = 0 ; i < booksObj.length; ++i) {
-    //  if (booksObj[i].subgender === subgender) {
-    //    recomendados.push(booksObj[i]);
-     // }
+    for(let i =0 ; i < keys.length; ++i) {
+      var currentObj = booksObj[keys[i]];
+      if (currentObj.subgenero == obj.subgenero) {
+        recomendados.push(currentObj);
+      }
     }
+
+  }
 
   
 
@@ -346,22 +342,22 @@ class UI {
 
         const id = parseInt(target.dataset.id, 10);
         let tempItem = cart.find(item => item.id === id);
-        tempItem.amount++;
+        tempItem.cantidad++;
         Storage.saveCart(cart);
         this.setItemValues(cart);
-        target.nextElementSibling.innerText = tempItem.amount;
+        target.nextElementSibling.innerText = tempItem.cantidad;
 
       } else if (target.classList.contains("decrease")) {
 
         const id = parseInt(target.dataset.id, 10);
         let tempItem = cart.find(item => item.id === id);
-        tempItem.amount--;
+        tempItem.cantidad--;
 
-        if (tempItem.amount > 0) {
+        if (tempItem.cantidad > 0) {
 
           Storage.saveCart(cart);
           this.setItemValues(cart);
-          target.previousElementSibling.innerText = tempItem.amount;
+          target.previousElementSibling.innerText = tempItem.cantidad;
 
         } else {
 
@@ -410,22 +406,21 @@ class Storage{
 
   /*- */
 
-  static getProduct(eventId) {
+  static getProduct(id) {
     const products = JSON.parse(localStorage.getItem("products"));
 
     var keys = Object.keys(products);
-    for(let i =0 ; i < keys.length; ++i) {
-      var currentObj = products[keys[i]];
-
-      if (currentObj.eventId === eventId) {
+    var currentObj;
+    for(let i = 0 ; i < keys.length; ++i) {
+      currentObj = products[keys[i]];
+      if (currentObj.id == id) 
         break;
-      }
 
-    }
-
-    return products.eventId;
-    //return products.find(product => product.eventId === eventId);
   }
+
+  return currentObj;
+
+}
 
   static getCart() {
     return localStorage.getItem("cart")
@@ -546,7 +541,7 @@ class Products{
     firebase.database().ref('/Books/').once('value').then(function (snapshot) {
       BookObj = snapshot.val();
       
-    //getDataFromDB(BookObj);
+
       return booksObj;
 
     });
@@ -555,17 +550,21 @@ class Products{
 
 }
 
+class Books {
+
+}
+
 function getDataFromDB (data) {
   bookData = data;
-  console.log(bookData);
+  //.log(bookData);
 }
 
 function goData(data) {
   const results = data.val();
-  console.log(results);
+  //console.log(results);
 
   let products = JSON.parse(JSON.stringify(results));
-  console.log(products);
+  //console.log(products);
 
   return products;
 
@@ -580,6 +579,7 @@ function errData(err) {
 document.addEventListener('DOMContentLoaded',async () =>{
   const ui = new UI();
   const products = new Products();
+  const books = new Books();
 
   ui.setAPP();
   ui.setAPPR();
@@ -587,6 +587,7 @@ document.addEventListener('DOMContentLoaded',async () =>{
   var productsObj;
   firebase.database().ref('/Books/').once('value').then(function (snapshot) {
     productsObj = snapshot.val();
+    booksObj = snapshot.val();
     
     //const productsObj = await products.getProducts();
 

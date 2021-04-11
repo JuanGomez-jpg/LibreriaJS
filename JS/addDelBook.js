@@ -16,13 +16,24 @@ function VolverInicio () {
     location.href ="http://localhost/node-libreria/";
 }
 
+
+
 let file;
 let fileName;
+let id;
 
 function chooseFile (e) {
     file = e.target.files[0];
     fileName = file.name;
-    console.log(fileName);
+    //console.log(fileName);
+
+    var allBooks;
+    allBooks = JSON.parse(localStorage.getItem("products"));
+
+    var keys = Object.keys(allBooks);
+
+    id = keys.length + 1;
+
 }
 
 form.addEventListener('submit', e => {
@@ -140,6 +151,7 @@ function checkInputs() {
 
             var postKey = firebase.database().ref('Books/').push().key;
             var downloadURL1;
+            
 
             uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
 
@@ -157,7 +169,8 @@ function checkInputs() {
                     precio: precioValue,
                     isbn: isbnValue,
                     descripcion: descripcionValue,
-                    url: downloadURL
+                    url: downloadURL,
+                    id: id
                 };
     
                 var book = JSON.parse(JSON.stringify(newBook));
