@@ -41,13 +41,16 @@ let recomendados = [];
 class UI {
   displayProducts(obj){
     let results = '';
-    obj.forEach(({title,image,id,price}) => {
+    console.log(obj);
+    let pop = [1, 2, 3, 4];
+    console.log(pop);
+    obj.forEach(({tittle,image,id,price}) => {
       results += `<div class="product">
                     <div class="image__container">
-                      <img src=${image} alt="" />
+                      <img src=${imagen} alt="" />
                     </div>
                     <div class="product__footer">
-                      <h1>${title}</h1>
+                      <h1>${tittle}</h1>
                       <div class="rating">
                         <span>
                           <svg>
@@ -80,7 +83,7 @@ class UI {
                            <button class="btn addToCart" data-id= ${id} >Añadir al carrito</button>
                            <button class="btn view" data-id=${id} >Ver</button>
                         </div>
-                        <div class="price">$${price}</div>
+                        <div class="price">$${precio}</div>
                       </div>
                     </div>
                   </div>`;
@@ -415,18 +418,130 @@ class Storage{
 class Products{
 
   async getProducts(){
-    try{
+    /*try{
       const results = await fetch('./JSON/books.json');
+
       const data = await results.json();
+      console.log(data);
+
       const products = data.items;
+      console.log(products);
+
       return products;
     }catch (err){
       console.log(err);
-    }
+    }*/
+   /* var newBook = {
+      eventId: postKey,
+      tittle: tituloValue,
+      autor: autorValue,
+      anio: anioValue,
+      categoria: categoriaValue,
+      subgenero: subgeneroValue,
+      editorial: editorialValue,
+      cantidad: cantValue,
+      precio: precioValue,
+      isbn: isbnValue,
+      descripcion: descripcionValue,
+      url: downloadURL
+  };*/
+   /* firebase.database().ref('Books').once('value', function(snapshot){
+      snapshot.forEach(
+        function(ChildSnapshot) {
+          let eventId = ChildSnapshot.val().eventId;
+          let tittle  = ChildSnapshot.val().tittle;
+          let autor  = ChildSnapshot.val().autor;
+          let anio = ChildSnapshot.val().anio;
+          let categoria = ChildSnapshot.val().categoria;
+          let subgenero = ChildSnapshot.val().subgenero;
+          let editorial = ChildSnapshot.val().editorial;
+          let cantidad = ChildSnapshot.val().cantidad;
+          let precio = ChildSnapshot.val().precio;
+          let isbn = ChildSnapshot.val().isbn;
+          let descripcion = ChildSnapshot.val().descripcion;
+          let url = ChildSnapshot.val().url;
+
+          var newBook = {
+              eventId: eventId,
+              tittle: tittle,
+              autor: autor,
+              anio: anio,
+              categoria: categoria,
+              subgenero: subgenero,
+              editorial: editorial,
+              cantidad: cantidad,
+              precio: precio,
+              isbn: isbn,
+              descripcion: descripcion,
+              url: url
+
+          };
+
+          var Book = JSON.parse(JSON.stringify(newBook));
+          
+
+
+          console.log(Book);
+
+          return Book;
+
+
+        }
+      )
+    });*/
+
+    var book = [];
+    firebase.database().ref('Books').once('value', function(snapshot){
+      snapshot.forEach(doc => {
+        const data = doc.val();
+        var newBook = {
+          eventId: data.eventId,
+          tittle: data.tittle,
+          autor: data.autor,
+          anio: data.anio,
+          categoria: data.categoria,
+          subgenero: data.subgenero,
+          editorial: data.editorial,
+          cantidad: data.cant,
+          precio: data.precio,
+          isbn: data.isbn,
+          descripcion: data.descripcion,
+          url: data.downloadURL
+      };
+      book.push(newBook);
+        
+    
+      });
+    });
+   // const products = data;
+   // console.log(products);
+    console.log(book);
+
+    return book;
+
 
   }
+
+
 }
 
+function goData(data) {
+  const results = data.val();
+  console.log(results);
+
+  let products = JSON.parse(JSON.stringify(results));
+  console.log(products);
+
+  return products;
+
+}
+
+function errData(err) {
+  console.log("Error");
+  console.log(err);
+}
+
+/*
 class Books{
 
   async getBooks(){
@@ -440,18 +555,18 @@ class Books{
     }
 
   }
-}
+}*/
 
 document.addEventListener('DOMContentLoaded',async () =>{
   const ui = new UI();
   const products = new Products();
-  const books = new Books();
+  //const books = new Books();
 
   ui.setAPP();
   ui.setAPPR();
 
   const productsObj = await products.getProducts();
-  booksObj = await books.getBooks();
+  //booksObj = await books.getBooks();
 
   ui.displayProducts(productsObj);
 
