@@ -42,15 +42,20 @@ class UI {
   displayProducts(obj){
     let results = '';
     console.log(obj);
-    let pop = [1, 2, 3, 4];
-    console.log(pop);
-    obj.forEach(({tittle,image,id,price}) => {
+
+    var keys = Object.keys(obj);
+    console.log(keys);
+
+    for(let i =0 ; i < keys.length; ++i) {
+
+      var currentObj = obj[keys[i]];
+
       results += `<div class="product">
                     <div class="image__container">
-                      <img src=${imagen} alt="" />
+                      <img src=${currentObj.url} alt="" />
                     </div>
                     <div class="product__footer">
-                      <h1>${tittle}</h1>
+                      <h1>${currentObj.tittle}</h1>
                       <div class="rating">
                         <span>
                           <svg>
@@ -80,14 +85,14 @@ class UI {
                       </div>
                       <div class="bottom">
                         <div class="btn__group">
-                           <button class="btn addToCart" data-id= ${id} >Añadir al carrito</button>
-                           <button class="btn view" data-id=${id} >Ver</button>
+                           <button class="btn addToCart" data-id= ${obj.eventId} >Añadir al carrito</button>
+                           <button class="btn view" data-id=${obj.eventId} >Ver</button>
                         </div>
-                        <div class="price">$${precio}</div>
+                        <div class="price">$${currentObj.precio}</div>
                       </div>
                     </div>
                   </div>`;
-    });
+    }
 
     productDOM.innerHTML = results;
   }
@@ -121,7 +126,7 @@ class UI {
 
     buttons.forEach(button => {
       const id = button.dataset.id;
-      const inCart = cart.find(item => item.id === parseFloat(id, 10));
+      const inCart = cart.find(item => item.eventId === parseFloat(id, 10));
       if(inCart) {
         button.innerText = 'En carrito';
         button.disable = true;
@@ -158,7 +163,7 @@ class UI {
       buttonV.addEventListener('click', e=> {
         e.preventDefault();
         //Get product from products
-        const cartItem = {...Storage.getProduct(id),amount: 1};
+        const cartItem = {...Storage.getProduct(eventId),amount: 1};
         //display the items in the cart
         this.viewProduct(cartItem);
 
@@ -182,36 +187,39 @@ class UI {
     itemTotals.innerText = itemTotal;
   }
 
-  addToCart ({title, price, image, id}) {
+  addToCart (obj) {
     let div = document.createElement("div");
     div.classList.add('cart__item');
 
-    div.innerHTML = `<img src=${image}>
-          <div>
-            <h3>${title}</h3>
-            <h3 class="price">$${price}</h3>
-          </div>
-          <div>
-            <span class="increase" data-id=${id}>
-              <svg>
-                <use xlink:href="./img/sprite.svg#icon-angle-up"></use>
-              </svg>
-            </span>
-            <p class="item__amount">1</p>
-            <span class="decrease" data-id=${id}>
-              <svg>
-                <use xlink:href="./img/sprite.svg#icon-angle-down"></use>
-              </svg>
-            </span>
-          </div>
-            <span class="remove__item" data-id=${id}>
-              <svg>
-                <use xlink:href="./img/sprite.svg#icon-trash"></use>
-              </svg>
-            </span>
-        </div>`;
 
-    cartContent.appendChild(div);
+      div.innerHTML = `<img src=${obj.url}>
+      <div>
+        <h3>${obj.tittle}</h3>
+        <h3 class="price">$${obj.precio}</h3>
+      </div>
+      <div>
+        <span class="increase" data-id=${obj.eventId}>
+          <svg>
+            <use xlink:href="../img/sprite.svg#icon-angle-up"></use>
+          </svg>
+        </span>
+        <p class="item__amount">1</p>
+        <span class="decrease" data-id=${obj.eventId}>
+          <svg>
+            <use xlink:href="../img/sprite.svg#icon-angle-down"></use>
+          </svg>
+        </span>
+      </div>
+        <span class="remove__item" data-id=${obj.eventId}>
+          <svg>
+            <use xlink:href="../img/sprite.svg#icon-trash"></use>
+          </svg>
+        </span>
+    </div>`;
+
+  cartContent.appendChild(div);
+
+    
   }
 
   BookDetails ({amount ,subgender ,categorie ,description ,year ,author ,price,title, image, id}) {
@@ -260,12 +268,13 @@ class UI {
     recomendados = [];
 
 
-    for (let i = 0 ; i < booksObj.length; ++i) {
-      if (booksObj[i].subgender === subgender) {
-        recomendados.push(booksObj[i]);
-      }
+    //for (let i = 0 ; i < booksObj.length; ++i) {
+    //  if (booksObj[i].subgender === subgender) {
+    //    recomendados.push(booksObj[i]);
+     // }
     }
-  }
+
+  
 
   show() {
     cartDOM.classList.add("show");
@@ -401,9 +410,21 @@ class Storage{
 
   /*- */
 
-  static getProduct(id) {
+  static getProduct(eventId) {
     const products = JSON.parse(localStorage.getItem("products"));
-    return products.find(product => product.id === parseFloat(id, 10));
+
+    var keys = Object.keys(products);
+    for(let i =0 ; i < keys.length; ++i) {
+      var currentObj = products[keys[i]];
+
+      if (currentObj.eventId === eventId) {
+        break;
+      }
+
+    }
+
+    return products.eventId;
+    //return products.find(product => product.eventId === eventId);
   }
 
   static getCart() {
@@ -490,7 +511,7 @@ class Products{
       )
     });*/
 
-    var book = [];
+  /*  var book = [];
     firebase.database().ref('Books').once('value', function(snapshot){
       snapshot.forEach(doc => {
         const data = doc.val();
@@ -517,12 +538,26 @@ class Products{
    // console.log(products);
     console.log(book);
 
-    return book;
+    return book;*/
 
+
+
+
+    firebase.database().ref('/Books/').once('value').then(function (snapshot) {
+      BookObj = snapshot.val();
+      
+    //getDataFromDB(BookObj);
+      return booksObj;
+
+    });
 
   }
 
+}
 
+function getDataFromDB (data) {
+  bookData = data;
+  console.log(bookData);
 }
 
 function goData(data) {
@@ -541,38 +576,30 @@ function errData(err) {
   console.log(err);
 }
 
-/*
-class Books{
-
-  async getBooks(){
-    try{
-      const results = await fetch('./JSON/books.json');
-      const data = await results.json();
-      const products = data.items;
-      return products;
-    }catch (err){
-      console.log(err);
-    }
-
-  }
-}*/
 
 document.addEventListener('DOMContentLoaded',async () =>{
   const ui = new UI();
   const products = new Products();
-  //const books = new Books();
 
   ui.setAPP();
   ui.setAPPR();
 
-  const productsObj = await products.getProducts();
-  //booksObj = await books.getBooks();
+  var productsObj;
+  firebase.database().ref('/Books/').once('value').then(function (snapshot) {
+    productsObj = snapshot.val();
+    
+    //const productsObj = await products.getProducts();
 
-  ui.displayProducts(productsObj);
 
-  Storage.saveProduct(productsObj);
-  ui.getButtons();
-  ui.cartLogic();
+    ui.displayProducts(productsObj);
+
+    Storage.saveProduct(productsObj);
+
+    ui.getButtons();
+    ui.cartLogic();
+});
+  
+
 });
 
 firebase.auth().onAuthStateChanged(function (user) {
