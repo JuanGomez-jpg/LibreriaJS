@@ -176,3 +176,7 @@ function obtenerLibrosCarrito () {
     displayProducts(libros);
 }
 
+function proceed () {
+  location.href = "http://localhost/node-libreria/pages/paymentForm.html";
+}
+

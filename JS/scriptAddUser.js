@@ -7,12 +7,14 @@ function addUser() {
     let username = document.getElementById("username").value;
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    console.log(username);
-    console.log(email);
-    console.log(password);
+    let address = document.getElementById("address").value;
+    let zipCode = document.getElementById("zipCode").value;
+
 
     var newUser = {
         username: username,
+        address: address,
+        zipCode: zipCode,
         email: email,
         password: password
     };

@@ -6,8 +6,8 @@ function VolverInicio () {
 }
 
 function authUser() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
 
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
@@ -22,6 +22,7 @@ function authUser() {
                     alert("No active user");
                 }
             })
+
             VolverInicio();
         })
         .catch((error) => {
@@ -30,4 +31,9 @@ function authUser() {
             alert(errorMessage);
         });
 }
+
+function loadData () {
+
+}
+
 

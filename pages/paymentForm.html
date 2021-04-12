@@ -1,0 +1,62 @@
+<!DOCTYPE>
+
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <title>
+            Payment
+        </title>
+        <link rel="stylesheet" href="../CSS/paymentForm.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+  </head>>
+
+    <body>
+
+        <div class="wrapper">
+            <div class="container">
+              <div class="title">Pago</div>
+              
+              <div class="input-form">
+                <div class="section-1">
+                  <div class="items">
+                    <label class="label">Número de tarjeta</label>
+                    <input type="text" class="input" maxlength="16" data-mask="0000 0000 0000 0000"placeholder="0000 0000 0000 0000" maxlength="16">
+                  </div>
+                </div>
+                <div class="section-2">
+                  <div class="items">
+                    <label class="label">Nombre titular de la tarjeta</label>
+                    <input type="text" class="input" placeholder="Nombre titular de la tarjeta">
+                  </div>
+                </div>
+                <div class="section-3">
+                  <div class="items">
+                    <label class="label">Fecha de expiración</label>
+                    <input type="text" class="input" data-mask="00 / 00" placeholder="MM / YY">
+                  </div>
+                  <div class="items">
+                    <div class="cvc">
+                      <label class="label">Código CVC</label>
+                      <div class="tooltip">?
+                        <div class="cvc-img"><img src="https://i.imgur.com/r8oXtry.png" alt=""></div>
+                      </div>
+                    </div>
+                    <input type="text" class="input" data-mask="000" placeholder="000" maxlength="3">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="btn">Proceder a comprar</div>
+              <div class="direccion">
+              </div>
+              
+            </div>
+          </div>
+
+          
+    <script src="../JS/paymentForm.js"></script>
+    </body>
+
+</html>

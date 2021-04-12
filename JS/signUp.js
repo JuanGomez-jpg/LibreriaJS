@@ -1,5 +1,7 @@
 const form = document.getElementById('form');
 const username = document.getElementById('username');
+const address = document.getElementById('address');
+const zipCode = document.getElementById('zipCode');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
@@ -21,12 +23,28 @@ function checkInputs() {
     const emailValue = email.value.trim();
     const passwordValue = password.value.trim();
     const password2Value = password2.value.trim();
+    const addressValue = address.value;
+    const zipCodeValue = zipCode.value;
 
     if(usernameValue === '') {
         setErrorFor(username, 'Username cannot be blank');
         validar = false;
     } else {
         setSuccessFor(username);
+    }
+
+    if(addressValue === '') {
+        setErrorFor(address, 'Address cannot be blank');
+        validar = false;
+    } else {
+        setSuccessFor(address);
+    }
+
+    if(zipCodeValue === '') {
+        setErrorFor(zipCode, 'Zip Code cannot be blank');
+        validar = false;
+    } else {
+        setSuccessFor(zipCode);
     }
 
     if(emailValue === '') {

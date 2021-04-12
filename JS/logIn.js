@@ -39,6 +39,31 @@ function checkInputs() {
 
     if (validar) {
         authUser();
+
+        firebase.database().ref('/users/').once('value').then(function (snapshot) {
+            var userObj = snapshot.val();
+            console.log(userObj);
+        
+            var keys = Object.keys(userObj);
+
+            for(let i =0 ; i < keys.length; ++i) {
+
+                var currentObj = userObj[keys[i]];
+
+                if (currentObj.email == emailValue) {
+                    let user = {
+                        username: currentObj.username,
+                        address: currentObj.address,
+                        zipCode: currentObj.zipCode,
+                        email: currentObj.zipCode
+                    };
+                    localStorage.setItem("activeUser", JSON.stringify(user));
+                    
+                }
+        
+            }
+    
+        });
     }
 
 }
