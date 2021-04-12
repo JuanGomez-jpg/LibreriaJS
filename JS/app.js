@@ -584,11 +584,39 @@ document.addEventListener('DOMContentLoaded',async () =>{
   ui.setAPP();
   ui.setAPPR();
 
+
+
+
   var productsObj;
   firebase.database().ref('/Books/').once('value').then(function (snapshot) {
     productsObj = snapshot.val();
     booksObj = snapshot.val();
     
+
+/*
+    let checkOut = {
+      noTarjeta: 123456789,
+      nombreUsuario: "JuanitoBanana",
+      address: "Diamante #123",
+      IdCheck: 1,
+      IdPedido: 1,
+      total: 1234.40
+    };
+  
+    let pedido = {
+      IdPedido: 1,
+      status: "En proceso"
+    };
+  
+    let librosP = {
+      IdPedido: 1,
+      libros: snapshot.val()
+    };
+  
+    let checkOutP = [checkOut,pedido,librosP];
+  
+    console.log(checkOutP);*/
+
     //const productsObj = await products.getProducts();
 
 

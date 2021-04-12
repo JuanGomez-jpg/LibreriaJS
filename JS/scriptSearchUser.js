@@ -32,8 +32,3 @@ function authUser() {
         });
 }
 
-function loadData () {
-
-}
-
-

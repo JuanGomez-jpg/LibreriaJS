@@ -56,7 +56,7 @@ body{
     margin-bottom: 20px;
 }
 
-.section-1 .items .input,
+.section-1 .items .noTarjeta,
 .section-2 .items .input,
 .section-3 .items .input{
     background: transparent;
@@ -69,7 +69,7 @@ body{
     
 }
 
-.section-1 .items .input:focus,
+.section-1 .items .noTarjeta:focus,
 .section-2 .items .input:focus,
 .section-3 .items .input:focus{
     background: transparent;

@@ -10,6 +10,10 @@
         <link rel="stylesheet" href="../CSS/paymentForm.css" />
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+        <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+        <script src="../JS/config.js"></script>
   </head>>
 
     <body>
@@ -22,7 +26,7 @@
                 <div class="section-1">
                   <div class="items">
                     <label class="label">Número de tarjeta</label>
-                    <input type="text" class="input" maxlength="16" data-mask="0000 0000 0000 0000"placeholder="0000 0000 0000 0000" maxlength="16">
+                    <input type="text" class="noTarjeta" id="noTarjeta" maxlength="16" data-mask="0000 0000 0000 0000"placeholder="0000 0000 0000 0000" maxlength="16">
                   </div>
                 </div>
                 <div class="section-2">
@@ -48,7 +52,7 @@
                 </div>
               </div>
               
-              <div class="btn">Proceder a comprar</div>
+              <div class="btn" >Proceder a comprar</div>
               <div class="direccion">
               </div>
               

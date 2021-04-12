@@ -107,7 +107,6 @@ function displayProducts(obj){
                       </div>
                     </div>`;
         total += parseFloat(currentObj.precio, 2) * parseInt(currentObj.cantidad);  
-
     }
 
     let totalCE;
@@ -146,6 +145,7 @@ function displayProducts(obj){
           <br>
           Total: $${totalCE}
         </div>`;
+    localStorage.setItem("subtotal", totalCE);
 
     subTotalDOM.innerHTML = results;
   }
@@ -164,6 +164,7 @@ function displayProducts(obj){
           Total: $${totalCE}
         </div>`;
 
+    localStorage.setItem("subtotal", totalCE);
     subTotalDOM.innerHTML = results;
   }
 
