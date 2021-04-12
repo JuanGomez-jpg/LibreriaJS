@@ -20,52 +20,42 @@ function addAll(){
     let noTarjeta = document.getElementById("noTarjeta").value;
     let nombreUsuario = active.username;
     let direccion = active.address;
-    var total = localStorage.getItem("subtotal").value;
+    let idUser = active.eventId;
+    var total = localStorage.getItem("subtotal");
 
 
-   /* let total = document.getElementById("username").value;
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let address = document.getElementById("address").value;
-    let zipCode = document.getElementById("zipCode").value;*/
 
+    var postKey = firebase.database().ref().child('checkOut').push().key;
+    var updates = {};
+
+
+    console.log(postKey);
     
     let checkOut = {
+      idUser: idUser,
       noTarjeta: noTarjeta,
       nombreUsuario: nombreUsuario,
       address: direccion,
-      IdCheck: 1,
-      IdPedido: 1,
-      total: total
+      idPedido: postKey,
+      totalPagar: total
     };
-    console.log(checkOut);
-  /*
+  
     let pedido = {
-      IdPedido: 1,
+      idPedido: postKey,
       status: "En proceso"
     };
   
     let librosP = {
-      IdPedido: 1,
+      IdPedido: postKey,
       libros: allCart
     };
   
     let checkOutP = [checkOut,pedido,librosP];
-  
-    console.log(checkOutP);*/
+
+    updates[`/checkOut/ ${idUser}`] = checkOutP;
+    firebase.database().ref().update(updates);
 
 
-
-  /*  var newUser = {
-        username: username,
-        address: address,
-        zipCode: zipCode,
-        email: email,
-        password: password
-    };*/
-   // var dataBase = firebase.database();
-    //var ref = dataBase.ref("users");
-  //  ref.push(newUser);
 
 }
 

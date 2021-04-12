@@ -10,17 +10,24 @@ function addUser() {
     let address = document.getElementById("address").value;
     let zipCode = document.getElementById("zipCode").value;
 
+    var postKey = firebase.database().ref().child('users').push().key;
+    var updates = {};
+
 
     var newUser = {
+        eventId: postKey,
         username: username,
         address: address,
         zipCode: zipCode,
         email: email,
         password: password
     };
-    var dataBase = firebase.database();
-    var ref = dataBase.ref("users");
-    ref.push(newUser);
+    updates[`/users/ ${postKey}`] = newUser;
+    firebase.database().ref().update(updates);
+
+    //var dataBase = firebase.database();
+    //var ref = dataBase.ref("users");
+   // ref.push(newUser);
 
 }
 

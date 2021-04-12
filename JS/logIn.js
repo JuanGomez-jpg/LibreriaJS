@@ -55,7 +55,8 @@ function checkInputs() {
                         username: currentObj.username,
                         address: currentObj.address,
                         zipCode: currentObj.zipCode,
-                        email: currentObj.zipCode
+                        email: currentObj.zipCode,
+                        eventId: currentObj.eventId
                     };
                     localStorage.setItem("activeUser", JSON.stringify(user));
                     
