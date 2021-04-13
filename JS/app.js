@@ -136,21 +136,59 @@ class UI {
         e.target.innerText = 'En carrito';
         e.target.disable = true;
 
+        let validarCantidadMaxima = true;
+
         //Get product from products
         const cartItem = {...Storage.getProduct(id),cantidad: 1};
-        //Add the product to cart
-        cart = [...cart, cartItem];
-        //Store the product in local storage
-        Storage.saveCart(cart);
-        //setItemValues
-        this.setItemValues(cart);
-        //display the items in the cart
-        this.addToCart(cartItem);
 
-        //Obtain all recommended books
-        this.recommendBook(cartItem);
-        //display the recommended books on list
-        this.displayRecommended(recomendados);
+        let allBooks = JSON.parse(localStorage.getItem("products"));
+        allBooks = localStorage.getItem("products")
+        ? JSON.parse(localStorage.getItem("products"))
+        : [];
+    
+        var keys = Object.keys(allBooks);
+
+        for(let j = 0 ; j < keys.length ; ++j) {
+
+            var currentObjBook = allBooks[keys[j]];
+
+            if (cartItem.eventId == currentObjBook.eventId) {
+              console.log(currentObjBook.cantidad - cartItem.cantidad);
+              let newAmount = (currentObjBook.cantidad - cartItem.cantidad);
+              
+              if (newAmount <= -1) {
+                validarCantidadMaxima = false;
+              }
+             break;
+    
+            }
+        }
+
+        if (!validarCantidadMaxima) {
+
+          alert("No hay stock de este libro");
+          e.target.innerText = 'Agregar al carrito';
+          e.target.disable = false;
+
+        } else {
+
+          //Add the product to cart
+          cart = [...cart, cartItem];
+          //Store the product in local storage
+          Storage.saveCart(cart);
+          //setItemValues
+          this.setItemValues(cart);
+          //display the items in the cart
+          this.addToCart(cartItem);
+
+          //Obtain all recommended books
+          this.recommendBook(cartItem);
+          //display the recommended books on list
+          this.displayRecommended(recomendados);
+
+        }
+
+
         
       });
 
@@ -340,15 +378,56 @@ class UI {
 
       } else if (target.classList.contains("increase") ) {
 
+        let validarCantidadMaxima = true;
+
         const id = parseInt(target.dataset.id, 10);
         let tempItem = cart.find(item => item.id === id);
-        tempItem.cantidad++;
-        Storage.saveCart(cart);
-        this.setItemValues(cart);
-        target.nextElementSibling.innerText = tempItem.cantidad;
+
+        /* ALGORITMO PARA VALIDAR QUE EL CLIENTE NO PUEDA COMPRAR MÁS LIBROS
+        DE LOS QUE HAY DISPONIBLES */
+        let allCart = JSON.parse(localStorage.getItem("cart"));
+        allCart = localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : [];
+
+        let allBooks = JSON.parse(localStorage.getItem("products"));
+        allBooks = localStorage.getItem("products")
+        ? JSON.parse(localStorage.getItem("products"))
+        : [];
+    
+        var keys = Object.keys(allBooks);
+    
+        for(let j = 0 ; j < allCart.length ; ++j) {
+
+          for (let i = 0 ; i <  keys.length ; ++i) {
+    
+            var currentObjBook = allBooks[keys[i]];
+    
+            if (tempItem.eventId == currentObjBook.eventId) {
+              console.log(currentObjBook.cantidad - tempItem.cantidad);
+              let newAmount = (currentObjBook.cantidad - tempItem.cantidad);
+              
+              if (newAmount == 0) {
+                validarCantidadMaxima = false;
+              }
+             break;
+    
+            }
+          }
+        }
+
+
+        if (!validarCantidadMaxima) {
+          alert("No hay más libros en stock");
+        } else {
+          tempItem.cantidad++;
+          Storage.saveCart(cart);
+          this.setItemValues(cart);
+          target.nextElementSibling.innerText = tempItem.cantidad;
+        }
+
 
       } else if (target.classList.contains("decrease")) {
-
         const id = parseInt(target.dataset.id, 10);
         let tempItem = cart.find(item => item.id === id);
         tempItem.cantidad--;
@@ -584,40 +663,11 @@ document.addEventListener('DOMContentLoaded',async () =>{
   ui.setAPP();
   ui.setAPPR();
 
-
-
-
   var productsObj;
   firebase.database().ref('/Books/').once('value').then(function (snapshot) {
     productsObj = snapshot.val();
     booksObj = snapshot.val();
     
-
-/*
-    let checkOut = {
-      noTarjeta: 123456789,
-      nombreUsuario: "JuanitoBanana",
-      address: "Diamante #123",
-      IdCheck: 1,
-      IdPedido: 1,
-      total: 1234.40
-    };
-  
-    let pedido = {
-      IdPedido: 1,
-      status: "En proceso"
-    };
-  
-    let librosP = {
-      IdPedido: 1,
-      libros: snapshot.val()
-    };
-  
-    let checkOutP = [checkOut,pedido,librosP];
-  
-    console.log(checkOutP);*/
-
-    //const productsObj = await products.getProducts();
 
 
     ui.displayProducts(productsObj);
