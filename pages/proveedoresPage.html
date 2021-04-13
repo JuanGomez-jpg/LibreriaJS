@@ -1,0 +1,182 @@
+<!DOCTYPE>
+
+<html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    
+        <!-- StyleSheet -->
+        <link rel="stylesheet" href="../CSS/proveedoresPage.css" />
+        <title>
+            Proveedores
+        </title>
+        <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-storage.js"></script>
+        <script src="../JS/config.js"></script>
+    </head>
+
+    <body>
+
+            <div class="container">
+
+                <div class="header">
+                    <h2>Agregar Proveedor</h2>
+                </div>
+                <form id="form" class="form">
+
+                    <div class="form-control">
+                        <label for="rfc">RFC</label>
+                        <input type="text" placeholder="RFC" id="rfc" maxlength="13" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="curp">CURP</label>
+                        <input type="text" placeholder="CURP" id="curp" maxlength="18" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="nombres">Nombres (s)</label>
+                        <input type="text" placeholder="Nombres" id="nombres" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="pApellido">Primer Apellido</label>
+                        <input type="text" placeholder="Primer Apellido" id="pApellido" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="sApellido"> Segundo Apellido</label>
+                        <input type="text" placeholder="Segundo Apellido" id="sApellido" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="nComercial">Nombre comercial</label>
+                        <input type="text" placeholder="Nombre Comercial" id="nComercial" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="cPostal">Código postal</label>
+                        <input type="number" placeholder="Código Postal" id="cPostal" maxlength="5" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="nVialidad">Nombre de Vialidad</label>
+                        <input type="text" placeholder="Nombre de Vialidad" id="nVialidad" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="nLocalidad">Nombre de la localidad</label>
+                        <input type="text" placeholder="Nombre de la localidad" id="nLocalidad" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="tVialidad">Tipo de Vialidad</label>
+                        <input type="text" placeholder="Tipo de Vialidad" id="tVialidad" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="nExterior">Número exterior</label>
+                        <input type="number" placeholder="Número exterior" id="nExterior" maxlength="5" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="eCalle">Entre calle</label>
+                        <input type="text" placeholder="Entre calle" id="eCalle" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="yCalle">y Calle</label>
+                        <input type="text" placeholder="y Calle" id="yCalle" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" placeholder="Correo Electrónico" id="email"  required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="numero">Número telefónico</label>
+                        <input type="number" placeholder="Número" id="numero" maxlength="10" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+
+                    <button id="btnSaveUser">Agregar</button>
+                </form>
+            </div>
+
+
+            <div class="containerE">
+                <div class="headerE">
+                    <h2>Eliminar Proveedor</h2>
+                </div>
+                <form id="formE" class="formE">
+
+                    <div class="form-controlE">
+                        <label for="rfcE">RFC</label>
+                        <input type="text" placeholder="RFC" id="rfcE" maxlength="13" required/>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+                    <button id="btnSaveUser" class="btnEliminar" >Eliminar</button>
+                </form>
+            </div>
+
+
+
+
+    <script src="../JS/proveedoresPage.js"></script>
+    </body>
+
+</html>

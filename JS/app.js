@@ -676,7 +676,16 @@ document.addEventListener('DOMContentLoaded',async () =>{
 
     ui.getButtons();
     ui.cartLogic();
+
+    firebase.database().ref('/Proveedor/').once('value').then(function (snapshot) {
+      let proveedores = snapshot.val();
+      localStorage.setItem("Proveedores", JSON.stringify(proveedores));
+    });
+
+
 });
+
+
   
 
 });
@@ -699,6 +708,7 @@ function hideLogin() {
 
   if (activeUser === "admin@admin.com") {
     document.getElementById("agregarLibro").style.visibility = "visible";
+    document.getElementById("proveedores").style.visibility = "visible";
     document.getElementById("proceed__ToCheck").style.visibility = "hidden";
   }
 
@@ -709,6 +719,7 @@ function showLogin() {
   document.getElementById("signup").style.visibility = "visible";
   document.getElementById("logout").style.visibility = "hidden";
   document.getElementById("proceed__ToCheck").style.visibility = "hidden";
+  document.getElementById("proveedores").style.visibility = "hidden";
   document.getElementById("agregarLibro").style.visibility = "hidden";
 }
 

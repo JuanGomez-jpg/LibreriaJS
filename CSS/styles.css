@@ -100,7 +100,6 @@ li {
   padding: 1.3rem 1.5rem;
   color: white;
   background-color: #777777;
-  visibility: visible;
   justify-content: space-between;
   position: fixed;
   visibility: visible;
@@ -108,6 +107,36 @@ li {
 
 .agregarLibro:focus {
   outline: none;
+}
+
+.agregarLibro:hover {
+  display: inline-block;
+  font-size: 2rem;
+  padding: 1.3rem 1.5rem;
+  color: black;
+  background-color: #e7e7e7;
+}
+
+.proveedores{
+  display: inline-block;
+  font-size: 2rem;
+  padding: 1.3rem 1.5rem;
+  color: white;
+  background-color: #777777;
+  visibility: visible;
+  align-items: flex-end;
+}
+
+.proveedores:focus {
+  outline: none;
+}
+
+.proveedores:hover {
+  display: inline-block;
+  font-size: 2rem;
+  padding: 1.3rem 1.5rem;
+  color: black;
+  background-color: #e7e7e7;
 }
 
 .signup{
@@ -172,6 +201,8 @@ li {
   color: black;
   background-color: #e7e7e7;
 }
+
+
 
 .proceed__ToCheck {
   display: inline-block;
