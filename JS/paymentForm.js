@@ -4,6 +4,16 @@ const addressDOM = document.querySelector('.direccion');
 var btn = document.querySelector('.btn');
 
 
+function addBook (newBookUpdated, id) {
+
+  var updates = {};
+
+  updates[`/Books/ ${id}`] = newBookUpdated;
+  firebase.database().ref().update(updates);
+
+}
+
+
 function addAll(){
     let allCart = JSON.parse(localStorage.getItem("cart"));
     allCart = localStorage.getItem("cart")
@@ -36,31 +46,87 @@ function addAll(){
 
     var keys = Object.keys(allBooks);
 
-    for(let i =0 ; i < keys.length; ++i) {
-      var currentObj = allBooks[keys[i]];
+    /* ALLGORITMO IMPORTANTE!! ALGORITMO QUE REDUCE LA CANTIDAD DE STOCK
+    DEL LIBRO QUE VAYA A COMPRAR EL CLIENTE */
+    for(let j =0 ; j < librosDelCarrito.length ; ++j) {
 
-      if (librosDelCarrito[i].eventId == currentObj.eventId) {
-        console.log("Si jala");
-        break;
+      var curretnCart = librosDelCarrito[j];
+
+      for (let i = 0 ; i <  keys.length ; ++i) {
+
+        var currentObjBook = allBooks[keys[i]];
+        //console.log(curretnCart);
+
+       if (curretnCart.eventId == currentObjBook.eventId) {
+
+         console.log("Si jala");
+         
+         let newAmount = (currentObjBook.cantidad - curretnCart.cantidad);
+         let id = currentObjBook.eventId;
+
+        /*  var newBookUpdated = {
+            eventId: currentObjBook.eventId,
+            tittle: currentObjBook.tittle,
+            autor: currentObjBook.autor,
+            anio: currentObjBook.anio,
+            categoria: currentObjBook.categoria,
+            subgenero: currentObjBook.subgenero,
+            editorial: currentObjBook.editorial,
+            cantidad: newAmount,
+            precio: currentObjBook.precio,
+            isbn: currentObjBook.isbn,
+            descripcion: currentObjBook.descripcion,
+            url: currentObjBook.url,
+            id: currentObjBook.id
+        };
+
+        var updates = {};
+        updates['/Books/' + currentObjBook.eventId] = newBookUpdated;
+      
+        firebase.database().ref().update(updates);*/
+
+        var query = firebase.database().ref("Books").orderByChild("eventId").equalTo(currentObjBook.eventId);
+        query.on('child_added', (snapshot) => {
+        snapshot.ref.remove();
+
+        });
+        
+
+        var newBookUpdated = {
+          eventId: currentObjBook.eventId,
+          tittle: currentObjBook.tittle,
+          autor: currentObjBook.autor,
+          anio: currentObjBook.anio,
+          categoria: currentObjBook.categoria,
+          subgenero: currentObjBook.subgenero,
+          editorial: currentObjBook.editorial,
+          cantidad: newAmount,
+          precio: currentObjBook.precio,
+          isbn: currentObjBook.isbn,
+          descripcion: currentObjBook.descripcion,
+          url: currentObjBook.url,
+          id: currentObjBook.id
+      };
+
+      var postKey = firebase.database().ref().child('Books').push().key;
+      var updates = {};
+  
+    
+  
+      updates[`/Books/ ${id}`] = newBookUpdated;
+      firebase.database().ref().update(updates);
+
+        //addBook(newBookUpdated, currentObjBook.eventId);
+
+
+         break;
+
+        }
       }
-
     }
-/*
-    var newBookUpdated = {
-      eventId: postKey,
-      tittle: tituloValue,
-      autor: autorValue,
-      anio: anioValue,
-      categoria: categoriaValue,
-      subgenero: subgeneroValue,
-      editorial: editorialValue,
-      cantidad: cantValue,
-      precio: precioValue,
-      isbn: isbnValue,
-      descripcion: descripcionValue,
-      url: downloadURL,
-      id: id
-  };*/
+
+
+
 
 
 
@@ -69,7 +135,6 @@ function addAll(){
     ? JSON.parse(localStorage.getItem("activeUser"))
     : [];
 
-    //console.log(allCart);
 
    /* let noTarjeta = document.getElementById("noTarjeta").value;
     let nombreUsuario = active.username;
@@ -110,6 +175,10 @@ function addAll(){
     firebase.database().ref().update(updates);*/
 
 }
+
+
+
+
 
 function returnActiveUser (){
     let activeUser = JSON.parse(localStorage.getItem("activeUser"));
