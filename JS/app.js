@@ -711,6 +711,13 @@ document.addEventListener('DOMContentLoaded',async () =>{
     });
 
 
+
+    firebase.database().ref('/masVendidos/').once('value').then(function (snapshot) {
+      let masVendidos = snapshot.val();
+      localStorage.setItem("masVendidos", JSON.stringify(masVendidos));
+    });
+
+
 });
 
 

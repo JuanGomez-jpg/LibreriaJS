@@ -28,7 +28,6 @@ function updateCart (allCart, keys, allBooks, postKey) {
       }
       if (!valid) 
         break;
-      
     }
 
     //console.log("Informacion del libro actualizada");
@@ -63,10 +62,10 @@ function addAll(){
     allBooks = localStorage.getItem("products")
     ? JSON.parse(localStorage.getItem("products"))
     : [];
-    console.log(allBooks);
+    //console.log(allBooks);
 
     var keys = Object.keys(allBooks);
-
+    var newBooksUpdatedVendidos = [];
     /* ALLGORITMO IMPORTANTE!! ALGORITMO QUE REDUCE LA CANTIDAD DE STOCK
     DEL LIBRO QUE VAYA A COMPRAR EL CLIENTE */
     for(let j =0 ; j < librosDelCarrito.length ; ++j) {
@@ -87,6 +86,12 @@ function addAll(){
           query.on('child_added', (snapshot) => {
           snapshot.ref.remove();
 
+          });
+
+        /* ELIMINAR VIEJO LIBRO */
+          var query = firebase.database().ref("masVendidos").orderByChild("eventId").equalTo(currentObjBook.eventId);
+          query.on('child_added', (snapshot) => {
+          snapshot.ref.remove();
           });
           
 
@@ -118,6 +123,72 @@ function addAll(){
         firebase.database().ref().update(updates);
 
 
+        firebase.database().ref('/masVendidos/').once('value').then(function (snapshot) {
+          let masVendidos = snapshot.val();
+          localStorage.setItem("masVendidos", JSON.stringify(masVendidos));
+        });
+
+
+
+        let masVendidos = JSON.parse(localStorage.getItem("masVendidos"));
+        masVendidos = localStorage.getItem("masVendidos")
+        ? JSON.parse(localStorage.getItem("masVendidos"))
+        : [];
+
+        let keysVendidos = Object.keys(masVendidos);
+        console.log(masVendidos);
+
+        let validarVendidoNuevo = true;
+
+        for ( let k = 0 ; k < keysVendidos.length ; ++k ) {
+          let currentObjVend = masVendidos[keysVendidos[k]];
+          console.log(currentObjVend.id);
+          if (currentObjVend.id == newBookUpdated.id) {
+              newBookUpdated = {
+                eventId: postKey,
+                tittle: currentObjBook.tittle,
+                autor: currentObjBook.autor,
+                anio: currentObjBook.anio,
+                categoria: currentObjBook.categoria,
+                subgenero: currentObjBook.subgenero,
+                editorial: currentObjBook.editorial,
+                cantidad: curretnCart.cantidad + currentObjVend.cantidad,
+                precio: currentObjBook.precio,
+                isbn: currentObjBook.isbn,
+                descripcion: currentObjBook.descripcion,
+                url: currentObjBook.url,
+                id: currentObjBook.id
+              };
+              updates[`/masVendidos/ ${postKey}`] = newBookUpdated;
+              firebase.database().ref().update(updates);
+              validarVendidoNuevo = false;
+              break;
+          }
+        }
+
+        /* EN CASO DE QUE NO HAYA HISTORIAL DE COMPRAS DE UN LIBRO...
+        AGREGA ESE LIBRO A LA BASE DE DATOS PARA QUE COMIENCE A TENER HISTORIAL */
+        if (validarVendidoNuevo) {
+            newBookUpdated = {
+              eventId: postKey,
+              tittle: currentObjBook.tittle,
+              autor: currentObjBook.autor,
+              anio: currentObjBook.anio,
+              categoria: currentObjBook.categoria,
+              subgenero: currentObjBook.subgenero,
+              editorial: currentObjBook.editorial,
+              cantidad: curretnCart.cantidad,
+              precio: currentObjBook.precio,
+              isbn: currentObjBook.isbn,
+              descripcion: currentObjBook.descripcion,
+              url: currentObjBook.url,
+              id: currentObjBook.id
+            };
+            updates[`/masVendidos/ ${postKey}`] = newBookUpdated;
+            firebase.database().ref().update(updates);
+        }
+
+
          break;
 
         }
@@ -139,13 +210,8 @@ function addAll(){
     let idUser = active.eventId;
     var total = localStorage.getItem("subtotal");
 
-
-
     var postKey = firebase.database().ref().child('checkOut').push().key;
     var updates = {};
-
-
-    console.log(postKey);
     
     let checkOut = {
       idUser: idUser,
@@ -168,12 +234,11 @@ function addAll(){
   
     let checkOutP = [checkOut,pedido,librosP];
 
-    updates[`/checkOut/ ${idUser}`] = checkOutP;
+    updates[`/checkOut/ ${postKey}`] = checkOutP;
     firebase.database().ref().update(updates);
 
+
 }
-
-
 
 
 
@@ -214,8 +279,6 @@ function returnActiveUser (){
 
 
 });
-
-
 
 
 
