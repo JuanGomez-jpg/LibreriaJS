@@ -705,3 +705,202 @@ li {
   text-align: left;
   margin-right: 1.4em;
 }
+
+
+/* + VENDIDOS */
+
+.vendidos__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 300ms ease-in-out;
+  background-color: rgba(0, 0, 0, 0.7);
+  visibility: hidden;
+  z-index: 2;
+}
+
+.vendidos__cart {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  width: 60%;
+  height: 80%;
+  padding: 1.6rem;
+  border-radius: 2rem;
+  z-index: 3;
+  overflow-y: scroll;
+  background-color:white;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 300ms ease-in-out;
+}
+
+.vendidos__cart.show {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.vendidos__overlay.show {
+  visibility: visible;
+}
+
+.close__vendidos {
+  cursor: pointer;
+}
+
+.close__vendidos svg {
+  fill: black;
+  transition: all 300ms ease-in-out;
+}
+
+.close__vendidos:hover svg {
+  fill: goldenrod;
+}
+
+.vendidos__cart svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.vendidos__cart h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+
+.vendidos__item svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: black;
+}
+
+.vendidos__item {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  width: 70%;
+  margin: 2rem auto;
+}
+
+.vendidos__item div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vendidos__item div span {
+  cursor: pointer;
+}
+
+.vendidos__item img {
+  width: 9.5rem;
+  height: 9.5rem;
+}
+
+.vendidos__item h3 {
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.vendidos__item .price {
+  color: black;
+  font-weight: 700;
+}
+
+.vendidos__item p {
+  font-weight: 700;
+}
+
+.vendidos__item .remove__vendidos {
+  cursor: pointer;
+}
+
+.vendidos__item .remove__vendidos svg {
+  fill: red;
+}
+
+@media only screen and (max-width: 1350px) {
+  .vendidos__item {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 996px) {
+  .vendidos__item {
+    grid-template-columns: 1fr 2fr 0.5fr 0.5fr;
+  }
+
+  .vendidos__item h3 {
+    font-size: 1.7rem;
+  }
+
+  .vendidos__item .remove__vendidos svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .recommended__item img {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+}
+
+.vendidos__icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.vendidos__icon h4 {
+  font-weight: 700;
+  color: #f0f0f0;
+}
+
+.vendidos__icon span {
+  position: absolute;
+  top: -1rem;
+  right: -2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3e3e3e;
+  color: black;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-radius: 50%;
+}
+
+.vendidos__footer {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.vendidos__footer h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+@media only screen and (max-width: 567px) {
+  .vendidos__cart {
+    width: 100%;
+    height: 100%;
+    border-radius: 0rem;
+  }
+
+  .vendidos__item h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.vendidos__logo {
+  text-align: left;
+  margin-right: 1.4em;
+}

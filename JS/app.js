@@ -1,23 +1,30 @@
 const openCart = document.querySelector('.cart__icon');
 const openRecommended = document.querySelector('.recommended__icon');
+const openVendidos = document.querySelector('.vendidos__icon');
 
 const closeCart = document.querySelector('.close__cart');
 const closeRecommended = document.querySelector('.close__recommended');
+const closeVendidos = document.querySelector('.close__vendidos');
 
 const productDOM = document.querySelector('.product__center');
 const bookDOM = document.querySelector('.recommended__center');
+//const vendidosDOM = document.querySelector('.vendidos__center');
 
 const cartDOM = document.querySelector('.cart');
 const recommendedDOM = document.querySelector('.recommended__cart');
+const vendidosDOM = document.querySelector('.vendidos__cart');
 
 const cartContent = document.querySelector(".cart__centent");
 const recommendedContent = document.querySelector('.recommended__centent');
+const vendidosContent = document.querySelector('.vendidos__centent');
 
 const itemTotals = document.querySelector('.item__total');
 const cartTotal = document.querySelector('.cart__total');
+const vendidosTotal = document.querySelector('.vendidos__total');
 
 const overlay = document.querySelector(".cart__overlay");
 const overlayRecommended = document.querySelector('.recommended__overlay');
+const overlayVendidos = document.querySelector('.vendidos__overlay');
 
 const clearCartBtn = document.querySelector(".clear__cart");
 
@@ -114,6 +121,7 @@ class UI {
 
     }
     recommendedContent.appendChild(diva);
+    //vendidosContent.appendChild(diva);
   }
 
   getButtons() {
@@ -320,6 +328,11 @@ class UI {
     overlayRecommended.classList.add("show");
   }
 
+  showV() {
+    vendidosDOM.classList.add("show");
+    overlayVendidos.classList.add("show");
+  }
+
   hide() {
     cartDOM.classList.remove("show");
     overlay.classList.remove("show");
@@ -329,6 +342,11 @@ class UI {
   hideR () {
     recommendedDOM.classList.remove("show");
     overlayRecommended.classList.remove("show");
+  }
+
+  hideV () {
+    vendidosDOM.classList.remove("show");
+    overlayVendidos.classList.remove("show");
   }
 
   setAPP() {
@@ -349,12 +367,21 @@ class UI {
     closeRecommended.addEventListener("click", this.hideR);
   }
 
+  setAPPV() {
+     openVendidos.addEventListener("click", this.showV);
+     closeVendidos.addEventListener("click", this.hideV);
+   }
+
   populate(cart) {
     cart.forEach(item => this.addToCart(item));
   }
 
   populateR(reco) {
     reco.forEach(item => this.addToRecommended(item));
+  }
+
+  populateV(ven) {
+    ven.forEach(item => this.addToVendidos(item));
   }
 
   cartLogic() {
@@ -662,6 +689,7 @@ document.addEventListener('DOMContentLoaded',async () =>{
 
   ui.setAPP();
   ui.setAPPR();
+  ui.setAPPV();
 
   var productsObj;
   firebase.database().ref('/Books/').once('value').then(function (snapshot) {
