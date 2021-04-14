@@ -69,9 +69,9 @@ function agregarProveedor () {
 function eliminarProveedor () {
     let provDel;
     provDel = JSON.parse(localStorage.getItem("Proveedores"));
-    //console.log(booksDel);
+    
     var keys = Object.keys(provDel);
-    //console.log(keys);
+
     let keyProveedor;
     let valid = false;
 
