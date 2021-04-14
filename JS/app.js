@@ -124,6 +124,29 @@ class UI {
     //vendidosContent.appendChild(diva);
   }
 
+  displayMasVendidos(obje){
+    let diva = document.createElement("div");
+    diva.classList.add('vendidos__item');
+
+    var keys = Object.keys(obje);
+
+    for(let i =0 ; i < keys.length; ++i) {
+      var currentObj = obje[keys[i]];
+      if (currentObj.cantidad > 5) {
+
+        diva.innerHTML += `<img src=${currentObj.url}>
+              <div>
+                <h3>${currentObj.tittle}</h3>
+                <h3 class="price">$${currentObj.precio}</h3>
+              </div>
+            </div>`;
+
+      }
+  }
+    vendidosContent.appendChild(diva);
+    //vendidosContent.appendChild(diva);
+  }
+
   getButtons() {
     const buttons = [...document.querySelectorAll(".addToCart")];
     const viewButtons = [...document.querySelectorAll(".view")];
@@ -697,7 +720,6 @@ document.addEventListener('DOMContentLoaded',async () =>{
     booksObj = snapshot.val();
     
 
-
     ui.displayProducts(productsObj);
 
     Storage.saveProduct(productsObj);
@@ -710,6 +732,11 @@ document.addEventListener('DOMContentLoaded',async () =>{
       localStorage.setItem("Proveedores", JSON.stringify(proveedores));
     });
 
+    firebase.database().ref('/masVendidos/').once('value').then(function (snapshot) {
+      let masvend = snapshot.val();
+      localStorage.setItem("masVendidos", JSON.stringify(masvend));
+      ui.displayMasVendidos(masvend);
+    });
 
 
     firebase.database().ref('/masVendidos/').once('value').then(function (snapshot) {
