@@ -292,9 +292,9 @@ function addAll(){
         alert("Está pasando de los estándares de peso base para un envío de Estafeta, se le cobrarán $245 de comisión");
       }
     }else if (tipoEnvio == "Fedex") {
-      //10kg 375.50
+      //6-10kg $145
       if (pesoTotal > 10) {
-        alert("Está pasando de los estándares de peso base para un envío de Fedex, se le cobrarán $375.50 de comisión");
+        alert("Está pasando de los estándares de peso base para un envío de Fedex, se le cobrarán $145 de comisión");
       }
     }else {
       //3kg $99
@@ -302,7 +302,7 @@ function addAll(){
         alert("Está pasando de los estándares de peso base para un envío de Correos de México, se le cobrarán $99 de comisión");
       }
     }
-    //console.log(pesoTotal);
+
     alert("Su compra ha sido actualizada.");
 
     time();
