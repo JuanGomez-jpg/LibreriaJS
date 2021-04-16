@@ -8,6 +8,7 @@ const editorial = document.getElementById('editorial');
 const cant = document.getElementById('cDisponible');
 const precio = document.getElementById('precio');
 const isbn = document.getElementById('isbn');
+const peso = document.getElementById('pseo');
 const descripcion = document.getElementById('descripcion');
 const isbnE = document.getElementById('isbnE');
 const imagen = document.getElementById('imagen');
@@ -59,18 +60,19 @@ function checkInputs() {
     const tituloValue = titulo.value;
     const autorValue = autor.value;
 
-    const anioValue = anio.value;
+    const anioValue = parseInt(anio.value);
     const categoriaValue = categoria.value;
 
     const subgeneroValue = subgenero.value;
     const editorialValue = editorial.value;
 
-    const cantValue = cant.value;
+    const cantValue = parseInt(cant.value);
     const precioValue = precio.value;
 
     const isbnValue = isbn.value;
+    const pesoValue = parseFloat(peso.value);
+
     const descripcionValue = descripcion.value;
-    
     const imagenValue = imagen.value;
     
 
@@ -140,6 +142,13 @@ function checkInputs() {
         setSuccessFor(isbn);
     }
 
+    if(pesoValue === '') {
+        setErrorFor(peso, 'Peso cannot be blank');
+        validar = false;
+    } else {
+        setSuccessFor(peso);
+    }
+
     if(descripcionValue === '') {
         setErrorFor(descripcion, 'Descripción cannot be blank');
         validar = false;
@@ -179,6 +188,7 @@ function checkInputs() {
                     cantidad: cantValue,
                     precio: precioValue,
                     isbn: isbnValue,
+                    peso: pesoValue,
                     descripcion: descripcionValue,
                     url: downloadURL,
                     id: id
