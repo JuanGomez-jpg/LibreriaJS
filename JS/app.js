@@ -727,22 +727,25 @@ document.addEventListener('DOMContentLoaded',async () =>{
     ui.getButtons();
     ui.cartLogic();
 
+    /* OBTENER LOS PROVEEDORES DE LA BASE DE DATOS Y SETEARLOS */
     firebase.database().ref('/Proveedor/').once('value').then(function (snapshot) {
       let proveedores = snapshot.val();
       localStorage.setItem("Proveedores", JSON.stringify(proveedores));
     });
 
+    /* OBTENER LOS LIBROS MÁS VENDOIDOS DE LA BASE DE DATOS Y SETEARLOS */
     firebase.database().ref('/masVendidos/').once('value').then(function (snapshot) {
       let masvend = snapshot.val();
       localStorage.setItem("masVendidos", JSON.stringify(masvend));
       ui.displayMasVendidos(masvend);
     });
 
+    /*  */
+  /*  firebase.database().ref('/checkOut/').once('value').then(function (snapshot) {
+      let historialCompras = snapshot.val();
+      localStorage.setItem("historialCompras", JSON.stringify(historialCompras));
+    });*/
 
-    firebase.database().ref('/masVendidos/').once('value').then(function (snapshot) {
-      let masVendidos = snapshot.val();
-      localStorage.setItem("masVendidos", JSON.stringify(masVendidos));
-    });
 
 
 });
@@ -793,6 +796,7 @@ function ReturnUser (user) {
 
 function LogOut () {
   firebase.auth().signOut();
+  localStorage.removeItem("activeUser");
   alert("Se ha cerrado sesión");
   showLogin();
 }

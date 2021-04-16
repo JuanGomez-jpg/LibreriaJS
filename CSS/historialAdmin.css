@@ -1,0 +1,162 @@
+/* ========= Reset ========= */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: black;
+  background-color: #ffffff;
+}
+
+h2,
+h3,
+h4 {
+  font-weight: 400;
+}
+
+
+
+ul,
+li {
+  list-style: none;
+}
+
+.container {
+  max-width: 114rem;
+  margin: 0 auto;
+  padding: 0 1.6rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  .container {
+    padding: 0 3rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 0 5rem;
+  }
+}
+
+/* Navigation */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 0;
+    line-height: 1rem;
+    background-color: #a0a3ad;
+  }
+  
+  .hamburger {
+    display: none;
+  }
+  
+  .nav__center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .nav__logo {
+    font-size: 2rem;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .nav__list {
+    display: flex;
+    align-items: center;
+  }
+
+  
+  /* HISTORIAL */
+
+.rating span svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    fill: goldenrod;
+  }
+  
+  .historial {
+    padding: 1rem 0;
+  }
+  
+  .historial__center {
+    padding: 0 .3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1rem 1rem;
+    background-color: rgb(243, 243, 243);
+    width: 800px;
+  }
+  
+  .historial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, .4);
+    font-weight: 600;
+  }
+
+  .historial:hover {
+    background-color: white;
+    color: rgb(150, 150, 150);
+    font-weight: bold;
+  }
+
+  .historial__header {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px 40px;
+  }
+  
+  .historial__footer {
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .historial__footer h1 {
+    font-size: 2rem;
+  }
+  
+  .rating {
+    margin: 1rem 0;
+  }
+  
+  .bottom {
+    display: grid;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, .4);
+  }
+
+  .historialContainer{
+    text-shadow: black;
+    font-size: 1.5em;
+  }
+
+  .status{
+    font-weight: bold;
+  }
+  

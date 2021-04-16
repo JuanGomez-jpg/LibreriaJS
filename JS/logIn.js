@@ -53,9 +53,9 @@ function checkInputs() {
                 if (currentObj.email == emailValue) {
                     let user = {
                         username: currentObj.username,
+                        email: currentObj.email,
                         address: currentObj.address,
                         zipCode: currentObj.zipCode,
-                        email: currentObj.zipCode,
                         eventId: currentObj.eventId
                     };
                     localStorage.setItem("activeUser", JSON.stringify(user));

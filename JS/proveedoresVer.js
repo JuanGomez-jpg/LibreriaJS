@@ -51,7 +51,9 @@ function displayProveedores(obj){
                                 ${currentObj.yCalle}
                                 </br>
                                 ${currentObj.numero}
+                                </br>
                             </div>
+                            <button class="button" onclick="pagar();">Pagar</button>
                         </div>
                     </div>`;
     }
@@ -70,6 +72,10 @@ function obtenerProveedores () {
     : [];
     console.log(proveedores);
     displayProveedores(proveedores);
+}
+
+function pagar () {
+    alert("Se ha realizado el pago exitosamente");
 }
 
 

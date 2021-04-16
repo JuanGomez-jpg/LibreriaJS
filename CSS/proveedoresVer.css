@@ -57,7 +57,7 @@ body {
 }
 
 
-/* LIBROS */
+/* PROVEEDORES */
 
 .rating span svg {
     width: 1.6rem;
@@ -111,5 +111,23 @@ body {
     align-items: center;
     padding: 0 2rem;
   }
+
+  .button{
+    background-color: grey;
+    border: 2px solid grey;
+    color: #ffffff;
+    display: block;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .button:hover {
+    background-color: #a0a3ad;
+    color: #222222;
+    border: 2px solid #a0a3ad;
+}
+
   
 
