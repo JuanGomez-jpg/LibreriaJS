@@ -23,7 +23,7 @@ function displayHistorial(obj){
                         </div>
                             <h1>Libros</h1>
                             <br>
-                            <h2 class="status">${obj[1].status}</h2>
+                            <h2 class="status">Estatus de envio: ${obj[1].status}</h2>
                             <div class="bottom">`;
         let curr = obj[2];
         //console.log(curr);

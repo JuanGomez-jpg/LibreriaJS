@@ -34,6 +34,26 @@ function updateCart (allCart, keys, allBooks, postKey) {
     //console.log(allCart);
 }
 
+function VolverInicio () {
+  location.href = "http://localhost/node-libreria/";
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function time() {
+  await sleep(4000);
+
+  for (let i = 0; i < 5; i++) {
+    if (i === 3)
+      await sleep(4000);
+      
+  }
+  VolverInicio();
+}
+
+
 function addAll(){
     let allCart = JSON.parse(localStorage.getItem("cart"));
     allCart = localStorage.getItem("cart")
@@ -110,6 +130,7 @@ function addAll(){
             cantidad: newAmount,
             precio: currentObjBook.precio,
             isbn: currentObjBook.isbn,
+            peso: currentObjBook.peso,
             descripcion: currentObjBook.descripcion,
             url: currentObjBook.url,
             id: currentObjBook.id
@@ -134,37 +155,45 @@ function addAll(){
         masVendidos = localStorage.getItem("masVendidos")
         ? JSON.parse(localStorage.getItem("masVendidos"))
         : [];
-
-        let keysVendidos = Object.keys(masVendidos);
-        console.log(masVendidos);
-
+        //console.log(masVendidos);
         let validarVendidoNuevo = true;
 
-        for ( let k = 0 ; k < keysVendidos.length ; ++k ) {
-          let currentObjVend = masVendidos[keysVendidos[k]];
-          console.log(currentObjVend.id);
-          if (currentObjVend.id == newBookUpdated.id) {
-              newBookUpdated = {
-                eventId: postKey,
-                tittle: currentObjBook.tittle,
-                autor: currentObjBook.autor,
-                anio: currentObjBook.anio,
-                categoria: currentObjBook.categoria,
-                subgenero: currentObjBook.subgenero,
-                editorial: currentObjBook.editorial,
-                cantidad: curretnCart.cantidad + currentObjVend.cantidad,
-                precio: currentObjBook.precio,
-                isbn: currentObjBook.isbn,
-                descripcion: currentObjBook.descripcion,
-                url: currentObjBook.url,
-                id: currentObjBook.id
-              };
-              updates[`/masVendidos/ ${postKey}`] = newBookUpdated;
-              firebase.database().ref().update(updates);
-              validarVendidoNuevo = false;
-              break;
+        if (masVendidos != null) {
+
+          var keysVendidos = Object.keys(masVendidos);
+          //console.log(masVendidos);
+
+          for ( let k = 0 ; k < keysVendidos.length ; ++k ) {
+            let currentObjVend = masVendidos[keysVendidos[k]];
+            //console.log(currentObjVend.id);
+            if (currentObjVend.id == newBookUpdated.id) {
+                newBookUpdated = {
+                  eventId: postKey,
+                  tittle: currentObjBook.tittle,
+                  autor: currentObjBook.autor,
+                  anio: currentObjBook.anio,
+                  categoria: currentObjBook.categoria,
+                  subgenero: currentObjBook.subgenero,
+                  editorial: currentObjBook.editorial,
+                  cantidad: curretnCart.cantidad + currentObjVend.cantidad,
+                  precio: currentObjBook.precio,
+                  isbn: currentObjBook.isbn,
+                  peso: currentObjBook.peso,
+                  descripcion: currentObjBook.descripcion,
+                  url: currentObjBook.url,
+                  id: currentObjBook.id
+                };
+                updates[`/masVendidos/ ${postKey}`] = newBookUpdated;
+                firebase.database().ref().update(updates);
+                validarVendidoNuevo = false;
+                break;
+            }
           }
         }
+
+
+
+
 
         /* EN CASO DE QUE NO HAYA HISTORIAL DE COMPRAS DE UN LIBRO...
         AGREGA ESE LIBRO A LA BASE DE DATOS PARA QUE COMIENCE A TENER HISTORIAL */
@@ -180,6 +209,7 @@ function addAll(){
               cantidad: curretnCart.cantidad,
               precio: currentObjBook.precio,
               isbn: currentObjBook.isbn,
+              peso: currentObjBook.peso,
               descripcion: currentObjBook.descripcion,
               url: currentObjBook.url,
               id: currentObjBook.id
@@ -212,7 +242,14 @@ function addAll(){
 
     var postKey = firebase.database().ref().child('checkOut').push().key;
     var updates = {};
-    
+
+    let pesoTotal = 0.0;
+
+    for (let i = 0; i < allCart.length ; ++i) {
+      let curr = allCart[i];
+      pesoTotal += (curr.cantidad * curr.peso);
+    }
+    let tipoEnvio = localStorage.getItem("tipoEnvio");
     let checkOut = {
       idUser: idUser,
       noTarjeta: noTarjeta,
@@ -236,6 +273,39 @@ function addAll(){
 
     updates[`/checkOut/ ${postKey}`] = checkOutP;
     firebase.database().ref().update(updates);
+
+    
+
+    if (tipoEnvio == "UPS") {
+      //1kg $175
+      if (pesoTotal > 1) {
+        alert("Está pasando de los estándares de peso base para un envío de UPS, se le cobrarán $175 de comisión");
+      }
+    }else if (tipoEnvio == "DHL") {
+      //1kg $220
+      if (pesoTotal > 1) {
+        alert("Está pasando de los estándares de peso base para un envío de DHL, se le cobrarán $220 de comisión");
+      }
+    }else if (tipoEnvio == "Estafeta") {
+      //5kg $245
+      if (pesoTotal > 5) {
+        alert("Está pasando de los estándares de peso base para un envío de Estafeta, se le cobrarán $245 de comisión");
+      }
+    }else if (tipoEnvio == "Fedex") {
+      //10kg 375.50
+      if (pesoTotal > 10) {
+        alert("Está pasando de los estándares de peso base para un envío de Fedex, se le cobrarán $375.50 de comisión");
+      }
+    }else {
+      //3kg $99
+      if (pesoTotal > 3) {
+        alert("Está pasando de los estándares de peso base para un envío de Correos de México, se le cobrarán $99 de comisión");
+      }
+    }
+    //console.log(pesoTotal);
+    alert("Su compra ha sido actualizada.");
+
+    time();
 
 
 }

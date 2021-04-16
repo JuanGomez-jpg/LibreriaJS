@@ -37,14 +37,14 @@
                     ? JSON.parse(localStorage.getItem("activeUser"))
                     : [];
 
-                    if (checkU.length == 0) {
-                        console.log("TODOS SE LA COMEN ALV");
-                    } else if (checkU.email == "admin@admin.com") {
-                        console.log("Pásale mi rey admin");
+                    if (checkU.email == "admin@admin.com") {
+
                         location.href= "http://localhost/node-libreria/pages/historialAdmin.html";
 
                     } else {
+
                         location.href= "http://localhost/node-libreria/pages/historialUsuario.html";   
+                        
                     }
                    
                 }

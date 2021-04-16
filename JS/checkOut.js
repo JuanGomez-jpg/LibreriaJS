@@ -20,7 +20,8 @@ function VolverInicio () {
 } 
 
 function setPrecioEnviarN () {
-  console.log("Normal");
+  //console.log("Normal");
+  localStorage.setItem("tipoEnvio","Normal");
   tipo = true;
   document.getElementById("form__r").style.visibility = "hidden";
   displaySubTotal();
@@ -45,6 +46,7 @@ function realizarOperacionesR () {
 function setPrecioEnviarR () {
   tipo = false;
   tipoEnvio = "UPS";
+  window.localStorage.setItem("tipoEnvio","UPS");
   document.getElementById("form__r").style.visibility = "visible";
   document.getElementById('form__r').reset();
   realizarOperacionesR ();
@@ -53,24 +55,28 @@ function setPrecioEnviarR () {
 
 function setPrecioUPS() {
   tipoEnvio = "UPS";
+  window.localStorage.setItem("tipoEnvio","UPS");
   realizarOperacionesR ();
   displaySubTotalR();
 }
 
 function setPrecioDHL() {
   tipoEnvio = "DHL";
+  window.localStorage.setItem("tipoEnvio","DHL");
   realizarOperacionesR ();
   displaySubTotalR();
 }
 
 function setPrecioEst() {
   tipoEnvio = "Estafeta";
+  window.localStorage.setItem("tipoEnvio","Estafeta");
   realizarOperacionesR ();
   displaySubTotalR();
 }
 
 function setPrecioFedex() {
   tipoEnvio = "Fedex";
+  window.localStorage.setItem("tipoEnvio","Fedex");
   realizarOperacionesR ();
   displaySubTotalR();
 }
@@ -123,7 +129,7 @@ function displayProducts(obj){
     displaySubTotal();
   }
 
-  function displaySubTotal(){
+function displaySubTotal(){
     let tipoE = 0.00;
     if (tipo) {
       totalCE = total + costoEnvioR + iva;
@@ -146,12 +152,11 @@ function displayProducts(obj){
           Total: $${totalCE}
         </div>`;
     localStorage.setItem("subtotal", totalCE);
-
     subTotalDOM.innerHTML = results;
   }
 
 
-  function displaySubTotalR(){
+function displaySubTotalR(){
     let results = '';
     results = `<div>
           <br>
@@ -173,11 +178,13 @@ function obtenerLibrosCarrito () {
     libros = localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [];
-    console.log(libros);
+    //console.log(libros);
     displayProducts(libros);
+    localStorage.setItem("tipoEnvio", "Normal");
 }
 
 function proceed () {
+  localStorage.setItem("tipoEnvio", tipoEnvio);
   location.href = "http://localhost/node-libreria/pages/paymentForm.html";
 }
 
