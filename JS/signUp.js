@@ -10,6 +10,21 @@ function VolverInicio () {
     location.href ="http://localhost/node-libreria/";
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
+  async function time() {
+    await sleep(2000);
+  
+    for (let i = 0; i < 5; i++) {
+      if (i === 3)
+        await sleep(2000);
+        
+    }
+    VolverInicio();
+  }
+
 form.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -87,7 +102,7 @@ function checkInputs() {
 
             auth.currentUser.sendEmailVerification()
             .then(() => {
-                console.log("Se ha enviado un correo de verificacion");
+                alert("Se ha enviado un correo de verificacion");
             })
             .catch(error => {
                 console.error(error);
@@ -97,22 +112,11 @@ function checkInputs() {
         .catch(error => {
             console.error(error);
         })
-
        // promise.catch( e => alert(e.message));
-
-
-       // promise2.catch( e => alert(e.message));
-    
-        //alert("Se ha creado tu cuenta " + email);
-
-
-        document.getElementById('form').reset();
-
+        time();
     }
 
 }
-
-
 
 function setErrorFor(input, message) {
     const formControl = input.parentElement;
