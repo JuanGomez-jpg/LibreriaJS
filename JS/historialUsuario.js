@@ -28,7 +28,7 @@ function displayHistorial(obj){
         let curr = obj[2];
         //console.log(curr);
         let currB = curr["libros"];
-        console.log(currB);
+        //console.log(currB);
         for (let j = 0; j < currB.length ; ++j) {
             displayBook(currB[j]);
             //console.log(currB[j]);

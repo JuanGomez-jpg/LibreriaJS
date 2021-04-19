@@ -42,7 +42,7 @@ function checkInputs() {
 
         firebase.database().ref('/users/').once('value').then(function (snapshot) {
             var userObj = snapshot.val();
-            console.log(userObj);
+            //console.log(userObj);
         
             var keys = Object.keys(userObj);
 
