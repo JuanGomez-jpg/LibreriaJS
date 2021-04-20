@@ -160,6 +160,26 @@ function checkInputs() {
 
     if (validar) {
 
+        /* OBTENER LOS LIBROS DE LA BASE DE DATOS Y SETEARLOS */
+      /*  firebase.database().ref('/Books/').once('value').then(function (snapshot) {
+            let libros = snapshot.val();
+            localStorage.setItem("Books", JSON.stringify(libros));
+        });
+
+        
+        let ultimoLibro = JSON.parse(localStorage.getItem("Books"));
+        ultimoLibro = localStorage.getItem("Books")
+        ? JSON.parse(localStorage.getItem("Books"))
+        : [];
+
+
+        
+        let key = Object.keys(ultimoLibro);
+
+        console.log(ultimoLibro);
+        console.log(key);*/
+
+
         var storageRef = firebase.storage().ref('/bookImages/' + fileName);
         var uploadTask = storageRef.put(file);
 
@@ -170,7 +190,7 @@ function checkInputs() {
         }, function() {
 
             var postKey = firebase.database().ref('Books/').push().key;
-            var downloadURL1;
+            //var downloadURL1;
             
 
             uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {

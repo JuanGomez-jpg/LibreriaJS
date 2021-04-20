@@ -86,7 +86,7 @@ class UI {
                         </span>
                         <span>
                           <svg>
-                            <use xlink:href="./img/sprite.svg#icon-star-empty"></use>
+                            <use xlink:href="./img/sprite.svg#icon-star-full"></use>
                           </svg>
                         </span>
                       </div>
@@ -771,7 +771,7 @@ function hideLogin() {
   document.getElementById("logout").style.visibility = "visible";
   document.getElementById("proceed__ToCheck").style.visibility = "visible";
 
-  if (activeUser === "admin@admin.com") {
+  if (activeUser ==  "admin@admin.com") {
     document.getElementById("agregarLibro").style.visibility = "visible";
     document.getElementById("proveedores").style.visibility = "visible";
     document.getElementById("proceed__ToCheck").style.visibility = "hidden";
@@ -791,6 +791,33 @@ function showLogin() {
 function ReturnUser (user) {
   alert("¡Hola de nuevo " + user + "!");
   activeUser = user;
+
+  firebase.database().ref('/users/').once('value').then(function (snapshot) {
+    let active = snapshot.val();
+    localStorage.setItem("user", JSON.stringify(active));
+  });
+  let ultimo = JSON.parse(localStorage.getItem("user"));
+  ultimo = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  : [];
+
+
+  var key = Object.keys(ultimo);
+ // console.log(key);
+  
+  let us;
+  for (let i = 0 ; i  < key.length; ++i) {
+    var u = ultimo[key[i]];
+    if (u.email == user) {
+      us = u;
+      break;
+    }
+  }
+
+  //console.log("Bienvenido" + us.username);
+  localStorage.setItem("activeUser", JSON.stringify(us));
+
+  
   hideLogin();
 }
 
